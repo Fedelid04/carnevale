@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['usr'])){ //controllo se l'user si è registrato
+        header('Location: ./login/login.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -44,6 +51,7 @@
 
         ?>
     </div>
+    <a href="./login/logout.php">Logout</a>
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>
