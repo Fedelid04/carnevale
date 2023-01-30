@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/formStyle2.css">
+    <link rel="stylesheet" href="css/navBar.css">
 
     <link href="./bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +18,9 @@
 
 <body>
     <?php
-    include './navBar.html';
+    
+    include './sideBar.html';
     ?>
-
     <div class="container" id="anteprima">
         <h3>ANTEPRIMA FOTO </h3>
         <?php
@@ -51,7 +51,6 @@
 
         ?>
     </div>
-    <a href="./login/logout.php">Logout</a>
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>

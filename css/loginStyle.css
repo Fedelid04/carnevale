@@ -1,0 +1,9 @@
+body {
+    background-image: url("../imgs/background.jpg");
+    background-repeat: no-repeat;
+}
+
+#FormLogin {
+    width: 100%;
+    text-align: center;
+}

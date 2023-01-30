@@ -6,7 +6,7 @@
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="../css/formStyle2.css">
+  <link rel="stylesheet" href="../css/navBar.css">
 </head>
 
 <body>
@@ -89,7 +89,7 @@
           <label for="inputState">Carica</label>
           <select name="carica" id="inputState" class="form-control">
             <?php
-            include "conn.php";
+            include "../conn.php";
             $sql = "SELECT carica FROM cariche";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
@@ -104,7 +104,7 @@
           <select name="maschera" id="inputState" class="form-control">
             <option value='nessuna'> nessuna</option>
             <?php
-            include "conn.php";
+            include "../conn.php";
             $sql = "SELECT nMaschera FROM maschera WHERE riparazione='no' AND nMaschera NOT IN(SELECT nMaschera FROM socio WHERE nMaschera IS NOT NULL)";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
@@ -133,7 +133,7 @@
             <?php
 
             try {
-              include "conn.php";
+              include "../conn.php";
               $sql = "SELECT dataEvento,descrizione,codiceEvento FROM evento";
               $stmt = $conn->prepare($sql);
               $stmt->execute();
@@ -183,12 +183,10 @@
         </div>
         <div class="form-group col-md-2">
           <br>
-          <label></label>
           <input class="form-control" type="reset" name="cancella" value="Annulla">
         </div>
         <div class="form-group col-md-2">
           <br>
-          <label></label>
           <input type="submit" value="registra" class="form-control" id="registrazione">
         </div>
     </form>
