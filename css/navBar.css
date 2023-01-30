@@ -12,18 +12,18 @@ body {
   display: none;
   transform: translateX(20%) translateY(-10%);
   position: absolute;
-  background-color: #1d1b31;
+  background-color: red;
 }
 
 .dropdown-content a {
-  color: white;
+  color: red;
   padding: 5px 5px;
   text-decoration: none;
   display: block;
 }
 
 .dropdown-content a:hover {
-  background-color: black;
+  background-color: white;
 }
 
 .dropdown:hover .dropdown-content {
@@ -41,7 +41,7 @@ body {
 }
 
 #col-sm-6 {
-  background: #a9b8df;
+  background: red;
   opacity: 90%;
   width: 380px;
   height: 196px;
@@ -53,7 +53,7 @@ body {
   justify-items: center;
   transition:all 0.3s ease-in-out;
 }
-#anteprima{
+/*#anteprima{
     color: #11101d;
     position: relative;
     float: right;
@@ -68,7 +68,7 @@ body {
     overflow-y: hidden;
     right: 180px;
     bottom: 58.5px;
-}
+}*/
 .col-sm-4{
   position: relative;
   float: left;
