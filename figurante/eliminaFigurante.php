@@ -13,7 +13,7 @@ try {
     $stmt = $conn->prepare($sql);
     $stmt->execute();
 
-    header("Location: ../home2.php", true, 301);
+    header("Location: ../home.php", true, 301);
     exit();
 } catch (PDOException $e) {
     echo "Errore nella query....<br/>";

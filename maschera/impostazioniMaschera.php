@@ -12,7 +12,7 @@
 
 <body>
   <div class="container-fluid">
-    <a href="../home2.php" class="btn btn-info" role="button">Home</a>
+    <a href="../home.php" class="btn btn-info" role="button">Home</a>
   </div>
   <div class='ricerca' style="text-align:center">
     <h1>Seleziona maschera da modificare</h1>

@@ -11,7 +11,7 @@
 
 <body>
   <div class="container-fluid">
-  <a href="../home2.php" class="btn btn-info" role="button">Link Button</a>
+  <a href="../home.php" class="btn btn-info" role="button">Link Button</a>
   </div>
   <div class="container">
     <h3 style="text-align: center;">REGISTRAZIONE</h3>
