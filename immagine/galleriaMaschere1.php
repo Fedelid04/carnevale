@@ -41,6 +41,7 @@
                             ';
                 }
                 echo "</div>";
+                echo "Ciao";
             } catch (PDOException $e) {
                 echo "Errore nella query....<br/>";
                 echo $e->getMessage() . "<br/>";
