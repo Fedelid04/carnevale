@@ -223,7 +223,9 @@ CREATE TABLE IF NOT EXISTS `tessera` (
   PRIMARY KEY (`nTessera`),
   KEY `FK_codSocio` (`codSocio`),
   CONSTRAINT `FK_codSocio` FOREIGN KEY (`codSocio`) REFERENCES `socio` (`codSocio`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+
+INSERT INTO login VALUES('SC1' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4');
 
 -- L’esportazione dei dati non era selezionata.
 

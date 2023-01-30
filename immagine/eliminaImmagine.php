@@ -79,7 +79,7 @@
             <section class="container">
 
                 <?php
-                include("stampaCampi.php");
+                include("../stampaCampi.php");
                 if (!(isset($_GET['nMaschera']))) {
 
                     try {
