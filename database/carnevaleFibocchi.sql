@@ -16,7 +16,8 @@
 
 
 -- Dump della struttura del database carnevalefibocchi
-CREATE DATABASE IF NOT EXISTS `carnevalefibocchi` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+DROP DATABASE IF EXISTS carnevalefibocchi;
+CREATE DATABASE `carnevalefibocchi`;
 USE `carnevalefibocchi`;
 
 -- Dump della struttura di tabella carnevalefibocchi.carica
@@ -24,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `carica` (
   `codCarica` varchar(50) NOT NULL,
   `tipoCarica` varchar(25) NOT NULL,
   PRIMARY KEY (`codCarica`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella carnevalefibocchi.carica: ~4 rows (circa)
 INSERT INTO `carica` (`codCarica`, `tipoCarica`) VALUES
@@ -293,6 +294,17 @@ INSERT INTO `tipo_tessera` (`idTipo`, `tipologia`, `prezzo`) VALUES
 	(1, 'membro onorario', 0),
 	(2, 'minorenne', 5),
 	(3, 'maggiorenne', 10);
+	
+INSERT INTO login VALUES('SC1' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+('SC2' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+('SC3' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+('SC4' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4');
+
+INSERT INTO galleria VALUES
+('FT1','IMG-62e3e2aa9ac4c3.38166641.png','MS1'),
+('FT2','IMG-62e3e24ba90c74.36521260.png','MS2'),
+('FT3','IMG-62fd11fc50a606.35870220.jpg','MS3'),
+('FT4','IMG-62fd251b1989d1.73623807.jpg','MS4');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
