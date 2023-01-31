@@ -5,5 +5,4 @@ session_start();
   if($_SESSION['ruolo']!="presidente"){
   header("Location: ../home.php");
   }
-  OK
 ?>
