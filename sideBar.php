@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <div class="sidebarclose" id="sidebar">
-        <div class="logo-details">
-            <i class='bx bx-mask'>
-                <h6 style="color: white; font-size: x-small; position: relative; bottom: 32px;">HOME</h6>
-            </i>
-        </div>
         <div class="sidebarclose">
             <div class="container-fluid" style="position: relative; right: 15px; top: 50px">
                 <div class="row">
@@ -28,33 +25,38 @@
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <h5 style="text-align: center;">Sezione soci</h5>
-                                <!--<a class="dropdown-item" href="#">sezione soci</a>-->
-                                <a class="dropdown-item" href="./socio/registraSocio.php">registrazione socio</a>
-                                <a class="dropdown-item" href="./socio/impostazioniSocio.php">modifica socio</a>
-                                <a class="dropdown-item" href="./socio/SocioElimina.php">elimina socio</a>
                                 <a class="dropdown-item" href="./socio/reportSocio.php">report socio</a>
-
+                                <!--<a class="dropdown-item" href="#">sezione soci</a>-->
+                                <?php
+                                if ($_SESSION['ruolo'] == "presidente") {
+                                    echo '<a class="dropdown-item" href="./socio/registraSocio.php">registrazione socio</a>';
+                                    echo '<a class="dropdown-item" href="./socio/impostazioniSocio.php">modifica socio</a>';
+                                    echo '<a class="dropdown-item" href="./socio/SocioElimina.php">elimina socio</a>';
+                                }
+                                ?>
                             </div>
-                            <br>
                             <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto
                             text-center align-items-center">
-                                <li class="nav-item">
-
-                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <?php
+                                if ($_SESSION['ruolo'] == "presidente") {
+                                    echo '<br>';
+                                    echo '<li class="nav-item">';
+                                    echo '<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
                                             <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                                         </svg>
-                                    </a>
-
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <h5 style="text-align: center;">Sezione figuranti</h5>
-                                        <!--<a class="dropdown-item" href="#">sezione figuranti</a>-->
-                                        <a class="dropdown-item" href="./figurante/gestioneFiguranti1.php">aggiungi figurante</a>
-                                        <a class="dropdown-item" href="./figurante/impostazioniFigurante.php">modifica figurante</a>
-                                        <a class="dropdown-item" href="./figurante/figuranteElimina.php">elimina figurante</a>
-                                    </div>
-                                </li>
+                                    </a>';
+                                    echo '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
+                                    echo '<h5 style="text-align: center;">Sezione figuranti</h5>';
+                                    echo '<a class="dropdown-item" href="./figurante/gestioneFiguranti1.php">aggiungi figurante</a>';
+                                    echo '<a class="dropdown-item" href="./figurante/impostazioniFigurante.php">modifica figurante</a>';
+                                    echo '<a class="dropdown-item" href="./figurante/figuranteElimina.php">elimina figurante</a>';
+                                    echo '</div>';
+                                    echo '</li>';
+                                }
+                                ?>
                                 <br>
+
                                 <li>
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bi bi-person"></i>
@@ -86,10 +88,15 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <h5 style="text-align: center;">Sezione tessera</h5>
                                         <a class="dropdown-item" href="./tessera/reporttessere.php">report tessera</a>
-                                        <a class="dropdown-item" href="./tessera/aggiungitessera.php">aggiungi tessera</a>
-                                        <a class="dropdown-item" href="./tessera/tesseraelimina.php">elimina tessera</a>
+
                                         <a class="dropdown-item" href="./pagamento/gestionepagamenti.php">gestione pagamento
                                             tessera</a>
+                                        <?php
+                                        if ($_SESSION['ruolo'] == "presidente") {
+                                            echo '<a class="dropdown-item" href="./tessera/aggiungitessera.php">aggiungi tessera</a>
+                                    <a class="dropdown-item" href="./tessera/tesseraelimina.php">elimina tessera</a>';
+                                        }
+                                        ?>
                                     </div>
                                 </li>
                                 <br>
@@ -121,15 +128,20 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <h5 style="text-align: center;">Sezione maschere</h5>
                                         <a class="dropdown-item" href="./maschera/reportMaschere.php">report maschere</a>
-                                        <a class="dropdown-item" href="./maschera/aggiungiMaschera.php">aggiungi maschera</a>
-                                        <a class="dropdown-item" href="./maschera/mascheraElimina.php">elimina maschera</a>
-                                        <a class="dropdown-item" href="./riparazione/gestioneRiparazioni.php">gestione riparazione
-                                            maschera</a>
-                                        <a class="dropdown-item" href="./sarta/aggiungiSarta.php">aggiungi sarta</a>
-                                        <a class="dropdown-item" href="./sarta/SartaElimina.php">elimina sarta</a>
-                                        <a class="dropdown-item" href="./maschera/impostazioniMaschera.php">modifica maschera</a>
-                                        <a class="dropdown-item" href="./immagine/aggiungiImmagine.php">aggiungi immagine</a>
                                         <a class="dropdown-item" href="./immagine/galleriaMaschere.php">galleria maschere</a>
+                                        <a class="dropdown-item" href="./riparazione/segnalazione.php">Segnalazione riparazione</a>
+                                        <?php
+                                        if ($_SESSION['ruolo'] == "presidente") {
+                                            echo '<a class="dropdown-item" href="./maschera/aggiungiMaschera.php">aggiungi maschera</a>
+                                            <a class="dropdown-item" href="./maschera/mascheraElimina.php">elimina maschera</a>
+                                            <a class="dropdown-item" href="./riparazione/gestioneRiparazioni.php">gestione riparazione
+                                            maschera</a>
+                                            <a class="dropdown-item" href="./sarta/aggiungiSarta.php">aggiungi sarta</a>
+                                            <a class="dropdown-item" href="./sarta/SartaElimina.php">elimina sarta</a>
+                                            <a class="dropdown-item" href="./maschera/impostazioniMaschera.php">modifica maschera</a>
+                                            <a class="dropdown-item" href="./immagine/aggiungiImmagine.php">aggiungi immagine</a>';
+                                        }
+                                        ?>
                                     </div>
                                 </li>
 
@@ -141,15 +153,17 @@
                                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
                                         </svg>
                                     </a>
-
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <h5 style="text-align: center;">Sezione eventi</h5>
                                         <a class="dropdown-item" href="./evento/reportEventi.php">report eventi</a>
-                                        <a class="dropdown-item" href="./evento/aggiungiEvento.php">aggiungi evento</a>
+                                        <?php
+                                        if ($_SESSION['ruolo'] == "presidente") {
+                                            echo '<a class="dropdown-item" href="./evento/aggiungiEvento.php">aggiungi evento</a>
                                         <a class="dropdown-item" href="./partecipazione/aggiungiPartecipazione.php">aggiungi partecipazione evento</a>
                                         <a class="dropdown-item" href="tabellaGenerale.php">gestione eventi</a>
-                                        <a class="dropdown-item" href="./evento/EventoElimina.php">elimina evento</a>
-
+                                        <a class="dropdown-item" href="./evento/EventoElimina.php">elimina evento</a>';
+                                        }
+                                        ?>
                                     </div>
                                 </li>
                                 <br>
@@ -169,8 +183,12 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <h5 style="text-align: center;">Sezione depositi</h5>
                                             <a class="dropdown-item" href="./deposito/reportDepositi.php">report depositi</a>
-                                            <a class="dropdown-item" href="./deposito/aggiungiDeposito1.php">aggiungi deposito</a>
-                                            <a class="dropdown-item" href="./deposito/DepositoElimina.php">elimina deposito</a>
+                                            <?php
+                                            if ($_SESSION['ruolo'] == "presidente") {
+                                                echo '<a class="dropdown-item" href="./deposito/aggiungiDeposito1.php">aggiungi deposito</a>
+                                                <a class="dropdown-item" href="./deposito/DepositoElimina.php">elimina deposito</a>';
+                                            }
+                                            ?>
                                         </div>
 
 
@@ -192,10 +210,10 @@
                                 <br>
                                 <li>
                                     <a href="./login/logout.php">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
-                                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                                    </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+                                            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
+                                        </svg>
                                     </a>
                                 </li>
                             </ul>

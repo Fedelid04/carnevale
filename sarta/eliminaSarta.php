@@ -1,4 +1,7 @@
 <?php
+  include "../controlloRuolo.php";
+?>
+<?php
 
 $codiceSarta= $_POST['codiceSarta'];
 echo $codiceSarta;

@@ -12,6 +12,11 @@ if (isset($_POST['usr']) && isset($_POST['pwd'])) { //controlla se l'utente ha f
             $usr = $row['codSocio'];
             $pwd = $row['PASSWORD'];
         }
+        $sql = "SELECT carica FROM socio where codSocio='$usr'";
+        $stmt=$conn->query($sql);
+        foreach ($stmt as $row){
+            $_SESSION['ruolo']=$row['carica'];
+        }
     } catch (Exception $e) {
         echo $e->getMessage();
     }

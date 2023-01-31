@@ -1,4 +1,7 @@
 <?php
+  include "../controlloRuolo.php";
+?>
+<?php
 
 $codiceCarica= $_GET['codiceCarica'];
 $carica=$_GET['carica'];

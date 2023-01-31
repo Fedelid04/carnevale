@@ -1,3 +1,6 @@
+<?php
+  include "../controlloRuolo.php";
+?>
 <html lang="en">
 
 <head>

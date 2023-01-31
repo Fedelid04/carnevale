@@ -1,4 +1,7 @@
 <?php
+  include "../controlloRuolo.php";
+?>
+<?php
 
 $numeroMasc = $_POST['nMaschera'];
 if (isset($_POST['submit']) && isset($_FILES['my_image'])) {

@@ -19,14 +19,14 @@
 <body>
     <?php
     
-    include './sideBar.html';
+    include 'sideBar.php';
     ?>
     <div class="container" id="anteprima">
         <h3>ANTEPRIMA FOTO </h3>
         <?php
         try {
             include "conn.php";
-            $sql = "SELECT * FROM galleria";
+            $sql = "SELECT * FROM galleria order by nMaschera desc limit 3";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $totale = $stmt->rowCount();
@@ -35,6 +35,7 @@
                 echo '<br>';
                 echo '<div class="col-sm-4">
                             <img class="project__image" src="uploads/' . $row['immagine'] . '" />
+                            <br><br><br><br><br><br><br><br>
                             <div id="col-sm-4" >
                             numero maschera: ' . $row['nMaschera'] . '
                             </div>
