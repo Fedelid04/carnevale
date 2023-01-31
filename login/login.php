@@ -10,12 +10,12 @@ if (isset($_POST['usr']) && isset($_POST['pwd'])) { //controlla se l'utente ha f
         $stmt = $conn->query($sql);
         foreach ($stmt as $row) {
             $usr = $row['codSocio'];
-            $pwd = $row['PASSWORD'];
+            $pwd = $row['psw'];
         }
-        $sql = "SELECT codCarica FROM socio where codSocio='$usr'";
+        $sql = "SELECT tipoCarica FROM carica join socio using (codCarica) where socio.codSocio like '$_POST[usr]'"; //query per ottenere il ruolo dell'utente
         $stmt=$conn->query($sql);
         foreach ($stmt as $row){
-            $_SESSION['tipoCarica']=$row['codCarica'];
+            $_SESSION['tipoCarica'] = $row['tipoCarica'];
         }
     } catch (Exception $e) {
         echo $e->getMessage();

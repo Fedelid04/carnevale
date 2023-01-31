@@ -1,3 +1,11 @@
+<?php
+    if(isset($_POST['codMaschera'])){
+    include '../conn.php';
+    $sql = "UPDATE maschera set riparazione = 'si' where codMaschera like '$_POST[codMaschera]'";
+    $conn->query($sql);
+    }
+?>
+
 <html lang="en">
 
 <head>
@@ -15,20 +23,20 @@
     </div>
     <div class="container">
         <h1 style="text-align: center;">SEGNALAZIONE MASCHERA ROTTA</h1>
-        <form action="segnalazioneEffettuata.php" method="post" name="form" style="text-align:center">
+        <form action="segnalazione.php" method="post" name="form" style="text-align:center">
             <br>
             <div class="form-row">
                 <div class="form-group col-sm-4 offset-4">
                     <label for="maschere">Codice Maschera:</label>
-                    <select id="maschera" name="nMaschera" class="form-control">
+                    <select id="maschera" name="codMaschera" class="form-control">
                         <?php
                         try {
                             include "../conn.php";
-                            $sql = "SELECT nMaschera FROM maschera where riparazione='no'";
+                            $sql = "SELECT codMaschera , descrizione FROM maschera where riparazione ='no'";
                             $stmt = $conn->prepare($sql);
                             $stmt->execute();
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo ' <option value=' . $row['nMaschera'] . '>' . $row['nMaschera'] . '</option>';
+                                echo ' <option value=' . $row['codMaschera'] . '>' . $row['codMaschera'].' '.$row['descrizione'].'</option>';
                             }
                         } catch (PDOException $e) {
                             echo "Errore nella query....<br/>";

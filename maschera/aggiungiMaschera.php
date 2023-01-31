@@ -1,6 +1,3 @@
-<?php
-  include "../controlloRuolo.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +21,7 @@
     <h3 style="text-align: center;">AGGIUNGI MASCHERA</h3>
     <form action="registerMaschera.php" method="post" name="form" id="form" class="">
       <div class="form-row">
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-3">
           <label for="deposito"> deposito:</label>
           <select class="form-control" id="deposito" name="deposito">
             <?php
@@ -34,8 +31,8 @@
               $stmt = $conn->prepare($sql);
               $stmt->execute();
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo ' <option value=' . $row['deposito'] . '>';
-                echo $row['deposito'];
+                echo ' <option value=' . $row['codDeposito'] . '>';
+                echo $row['via'].' '.$row['citta'];
                 echo '</option>';
               }
             } catch (PDOException $e) {
@@ -58,7 +55,7 @@
               $stmt = $conn->prepare($sql);
               $stmt->execute();
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo ' <option value=' . $row['codiceSarta'] . '>' . $row['codiceSarta'] . ' nome: ' . $row['nomeSarta'] . ' (costo: ' . $row['costoOra'] . ' euro)</option>';
+                echo ' <option value=' . $row['codiceSarta'] . '>' . $row['nome'].' '.$row['cognome'].'</option>';
               }
             } catch (PDOException $e) {
               echo "Errore nella query....<br/>";
