@@ -26,7 +26,7 @@
         <?php
         try {
             include "conn.php";
-            $sql = "SELECT * FROM galleria order by nMaschera desc limit 3";
+            $sql = "SELECT * FROM galleria order by codFoto desc limit 3";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $totale = $stmt->rowCount();
@@ -34,10 +34,10 @@
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo '<br>';
                 echo '<div class="col-sm-4">
-                            <img class="project__image" src="uploads/' . $row['immagine'] . '" />
+                            <img class="project__image" src="uploads/' . $row['percorso'] . '" />
                             <br><br><br><br><br><br><br><br>
                             <div id="col-sm-4" >
-                            numero maschera: ' . $row['nMaschera'] . '
+                            numero maschera: ' . $row['codFoto'] . '
                             </div>
                             </div>';
             }

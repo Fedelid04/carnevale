@@ -6,16 +6,16 @@ if (isset($_POST['usr']) && isset($_POST['pwd'])) { //controlla se l'utente ha f
     $_SESSION['pwd'] = $_POST['pwd'];
     try {
         $sql = "SELECT * from login where codSocio LIKE '" . $_SESSION['usr'] . "'
-        AND PASSWORD like '" . hash('sha256', $_SESSION['pwd']) . "';"; //query per selezionare l'utente
+        AND psw like '" . hash('sha256', $_SESSION['pwd']) . "';"; //query per selezionare l'utente
         $stmt = $conn->query($sql);
         foreach ($stmt as $row) {
             $usr = $row['codSocio'];
             $pwd = $row['PASSWORD'];
         }
-        $sql = "SELECT carica FROM socio where codSocio='$usr'";
+        $sql = "SELECT codCarica FROM socio where codSocio='$usr'";
         $stmt=$conn->query($sql);
         foreach ($stmt as $row){
-            $_SESSION['ruolo']=$row['carica'];
+            $_SESSION['tipoCarica']=$row['codCarica'];
         }
     } catch (Exception $e) {
         echo $e->getMessage();

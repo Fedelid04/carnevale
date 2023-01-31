@@ -2,7 +2,7 @@
 session_start();
 ?>
 <?php
-  if($_SESSION['ruolo']!="presidente"){
+  if($_SESSION['tipoCarica']!="C1"){
   header("Location: ../home.php");
   }
 ?>

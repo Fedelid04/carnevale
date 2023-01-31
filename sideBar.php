@@ -28,7 +28,7 @@
                                 <a class="dropdown-item" href="./socio/reportSocio.php">report socio</a>
                                 <!--<a class="dropdown-item" href="#">sezione soci</a>-->
                                 <?php
-                                if ($_SESSION['ruolo'] == "presidente") {
+                                if ($_SESSION['tipoCarica'] == "C1") {
                                     echo '<a class="dropdown-item" href="./socio/registraSocio.php">registrazione socio</a>';
                                     echo '<a class="dropdown-item" href="./socio/impostazioniSocio.php">modifica socio</a>';
                                     echo '<a class="dropdown-item" href="./socio/SocioElimina.php">elimina socio</a>';
@@ -38,7 +38,7 @@
                             <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto
                             text-center align-items-center">
                                 <?php
-                                if ($_SESSION['ruolo'] == "presidente") {
+                                if ($_SESSION['tipoCarica'] == "C1") {
                                     echo '<br>';
                                     echo '<li class="nav-item">';
                                     echo '<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -92,7 +92,7 @@
                                         <a class="dropdown-item" href="./pagamento/gestionepagamenti.php">gestione pagamento
                                             tessera</a>
                                         <?php
-                                        if ($_SESSION['ruolo'] == "presidente") {
+                                        if ($_SESSION['tipoCarica'] == "C1") {
                                             echo '<a class="dropdown-item" href="./tessera/aggiungitessera.php">aggiungi tessera</a>
                                     <a class="dropdown-item" href="./tessera/tesseraelimina.php">elimina tessera</a>';
                                         }
@@ -131,7 +131,7 @@
                                         <a class="dropdown-item" href="./immagine/galleriaMaschere.php">galleria maschere</a>
                                         <a class="dropdown-item" href="./riparazione/segnalazione.php">Segnalazione riparazione</a>
                                         <?php
-                                        if ($_SESSION['ruolo'] == "presidente") {
+                                        if ($_SESSION['tipoCarica'] == "presidente") {
                                             echo '<a class="dropdown-item" href="./maschera/aggiungiMaschera.php">aggiungi maschera</a>
                                             <a class="dropdown-item" href="./maschera/mascheraElimina.php">elimina maschera</a>
                                             <a class="dropdown-item" href="./riparazione/gestioneRiparazioni.php">gestione riparazione
@@ -157,8 +157,8 @@
                                         <h5 style="text-align: center;">Sezione eventi</h5>
                                         <a class="dropdown-item" href="./evento/reportEventi.php">report eventi</a>
                                         <?php
-                                        if ($_SESSION['ruolo'] == "presidente") {
-                                            echo '<a class="dropdown-item" href="./evento/aggiungiEvento.php">aggiungi evento</a>
+                                        if ($_SESSION['tipoCarica'] == "presidente") {
+                                        echo '<a class="dropdown-item" href="./evento/aggiungiEvento.php">aggiungi evento</a>
                                         <a class="dropdown-item" href="./partecipazione/aggiungiPartecipazione.php">aggiungi partecipazione evento</a>
                                         <a class="dropdown-item" href="tabellaGenerale.php">gestione eventi</a>
                                         <a class="dropdown-item" href="./evento/EventoElimina.php">elimina evento</a>';
@@ -184,7 +184,7 @@
                                             <h5 style="text-align: center;">Sezione depositi</h5>
                                             <a class="dropdown-item" href="./deposito/reportDepositi.php">report depositi</a>
                                             <?php
-                                            if ($_SESSION['ruolo'] == "presidente") {
+                                            if ($_SESSION['tipoCarica'] == "presidente") {
                                                 echo '<a class="dropdown-item" href="./deposito/aggiungiDeposito1.php">aggiungi deposito</a>
                                                 <a class="dropdown-item" href="./deposito/DepositoElimina.php">elimina deposito</a>';
                                             }
