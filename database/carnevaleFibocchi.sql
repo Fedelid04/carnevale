@@ -81,6 +81,27 @@ CREATE TABLE IF NOT EXISTS `figurante_manichino` (
 
 -- L’esportazione dei dati non era selezionata.
 
+-- Dump della struttura di tabella carnevalefibocchi.galleria
+CREATE TABLE IF NOT EXISTS `galleria` (
+  `codFoto` varchar(50) NOT NULL,
+  `percorso` varchar(255) NOT NULL,
+  `codMaschera` varchar(50) NOT NULL,
+  PRIMARY KEY (`codFoto`),
+  KEY `codMaschera` (`codMaschera`),
+  CONSTRAINT `galleria_ibfk_1` FOREIGN KEY (`codMaschera`) REFERENCES `maschera` (`codMaschera`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- L’esportazione dei dati non era selezionata.
+
+-- Dump della struttura di tabella carnevalefibocchi.login
+CREATE TABLE IF NOT EXISTS `login` (
+  `codSocio` varchar(50) NOT NULL,
+  `psw` varchar(255) NOT NULL,
+  PRIMARY KEY (`codSocio`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- L’esportazione dei dati non era selezionata.
+
 -- Dump della struttura di tabella carnevalefibocchi.manichino
 CREATE TABLE IF NOT EXISTS `manichino` (
   `codManichino` varchar(50) NOT NULL,
