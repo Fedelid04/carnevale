@@ -14,7 +14,7 @@ include '../controlloRuolo.php';
 
 <body>
   <div class="container-fluid">
-  <a href="../home.php" class="btn btn-info" role="button">Link Button</a>
+    <a href="../home.php" class="btn btn-info" role="button">Home</a>
   </div>
   <div class="container">
     <h3 style="text-align: center;">REGISTRAZIONE</h3>
@@ -52,15 +52,15 @@ include '../controlloRuolo.php';
           <input name="provincia" type="text" class="form-control" placeholder="Arezzo" required>
         </div>
         <div class="form-group col-md-2">
-          <label for="tipologiaSocio">tipo tessera:
+          <label for="tipologiaTessera">tipo tessera:
           </label>
-          <select id="tipologiaSocio" name="tipologiaSocio" required class="form-control">
+          <select id="tipologiaTessera" name="tipologiaTessera" required class="form-control">
             <?php
             include '../conn.php';
             $sql = "SELECT tipologia from tipo_tessera;";
-            $stmt=$conn->query($sql);
-            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-              echo '<option value="'.$row['tipologia'].'">'.$row['tipologia'].'</option>';
+            $stmt = $conn->query($sql);
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+              echo '<option value="' . $row['tipologia'] . '">' . $row['tipologia'] . '</option>';
             }
             ?>
           </select>
@@ -81,12 +81,9 @@ include '../controlloRuolo.php';
         </div>
         <div class="form-group col-md-2">
           <label for="dataIscrizione">data iscrizione:</label>
-
           <?php
-
           date_default_timezone_get();
           $date = date('Y-m-d', time());
-
           echo '<input type="date" id="dataIscrizione" name="dataIscrizione" placeholder="data di iscrizione"
                     min="1920-01-01" max=' . $date . ' required class=form-control>';
           ?>
@@ -102,23 +99,50 @@ include '../controlloRuolo.php';
         </div>
         <div class="form-group col-md-2">
           <label for="figurante">figurante:</label>
-          <select class="form-control" id="figurante" name="figurante" required>
-            <option value="si"> si </option>
-            <option value="no"> no </option>
+          <select class="form-control" id="figurante" name="figurante" required onchange=mask()>
+            <option value="si">si</option>
+            <option value="no">no</option>
           </select>
         </div>
-        <div class="form-group col-md-2">
-          <label for="">‎</label>
-          <input class="form-control" type="reset" name="cancella" value="Annulla">
+        <div class="form-group col-md-2" id="SceltaMaschera" style="display:none;">
+          <label for="">Scegli Maschera:</label>
+          <select id="mascheraFigurante" name="mascheraFigurante" required class="form-control">
+            <?php
+            include '../conn.php';
+            $sql = "SELECT * from maschera;";
+            $stmt = $conn->query($sql);
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+              echo '<option value="' . $row['codMaschera'] . '">' . $row['codMaschera'] . '</option>';
+            }
+            ?>
+          </select>
         </div>
-        <div class="form-group col-md-2">
-          <label for="">‎</label>
-          <input type="submit" value="registra" class="form-control" id="registrazione">
+        <br>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="">‎</label>
+            <input class="form-control" type="reset" name="cancella" value="Annulla">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">‎</label>
+            <input type="submit" value="registra" class="form-control" id="registrazione">
+          </div>
         </div>
     </form>
   </div>
+  <script>
+    function mask() {
+      if (document.getElementById("figurante").value == "si") {
+        document.getElementById("SceltaMaschera").style.display = "block";
+      }
+      if (document.getElementById("figurante").value == "no") {
+        document.getElementById("SceltaMaschera").style.display = "none";
+      }
+    }
+  </script>
   <script src="//code.jquery.com/jquery.js"></script>
   <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+
 </body>
 
 </html>
