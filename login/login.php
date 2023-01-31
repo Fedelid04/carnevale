@@ -24,6 +24,9 @@ if (isset($_POST['usr']) && isset($_POST['pwd'])) { //controlla se l'utente ha f
         header('location: ../home.php');
     } else { //se la query non ha trovato l'utente messaggio di errore
         echo '<script>alert("Errore nel login")</script>';
+        sscanf(
+
+        )
     }
 }
 ?>
