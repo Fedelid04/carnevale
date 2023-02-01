@@ -1,7 +1,7 @@
 
 <?php
 
-include  "conn.php";
+include  "../conn.php";
 
 $codiceSarta=$_POST['codiceSarta'];
 

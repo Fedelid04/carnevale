@@ -24,7 +24,7 @@
                         <?php
                         try {
                             include "../conn.php";
-                            $sql = "SELECT codSocio FROM socio";
+                            $sql = "SELECT codSocio FROM socio where figurante='no'";
                             $stmt = $conn->prepare($sql);
                             $stmt->execute();
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

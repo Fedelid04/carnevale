@@ -8,7 +8,7 @@
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="../css/formStyle2.css">
+  <link rel="stylesheet" href="../css/navBar.css">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 
             try {
               include "../conn.php";
-              $sql = "SELECT  * FROM figuranti";
+              $sql = "SELECT  * FROM figurante";
               $stmt = $conn->prepare($sql);
               $stmt->execute();
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

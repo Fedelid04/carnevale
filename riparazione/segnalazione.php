@@ -13,15 +13,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="../css/NAVBAR2.css">
     <link rel="stylesheet" href="../css/navBar.css">
     <title>Document</title>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <a href="../home.php" class="btn btn-info" role="button">Home</a>
-    </div>
-    <div class="container">
+    <?php
+    include 'navbarRiparazione.php';
+    ?>
+    <div class="container" id="FormUpdate">
         <h1 style="text-align: center;">SEGNALAZIONE MASCHERA ROTTA</h1>
         <form action="segnalazione.php" method="post" name="form" style="text-align:center">
             <br>

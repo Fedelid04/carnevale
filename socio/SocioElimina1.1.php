@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="../css/formStyle2.css">
+    <link rel="stylesheet" href="../css/NAVBAR2.css">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <a href="../home.php" class="btn btn-info" role="button">Link Button</a>
-    </div>
+<?php
+  include 'navbarSocio.php';
+  ?>
     <div class="container" id="FormElimina">
         <h1>Elimina Socio</h1>
         <form action="eliminaSocio.php" method="post">
@@ -33,7 +34,7 @@
     </form>
     </div>
     <script src="//code.jquery.com/jquery.js"></script>
-    <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+    <script src="../bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

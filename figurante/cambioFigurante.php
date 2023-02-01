@@ -8,8 +8,8 @@ $uscitaEsterna=$_POST['uscitaEsterna'];
 $recupero=$_POST['maschera'];
 echo $recupero;
 
-$sql = "SELECT mascheraRecupero FROM figuranti
-WHERE mascheraRecupero = '$recupero'  LIMIT 1";
+$sql = "SELECT mascheraRiserva FROM figurante
+WHERE mascheraRiserva = '$recupero'  LIMIT 1";
 
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -25,7 +25,7 @@ if ($totale == 1) {
        
         $codiceSocioVecchio=$_GET['codSocio'];
        
-        $sql = "SELECT * FROM figuranti WHERE codSocio='$codiceSocioVecchio'";
+        $sql = "SELECT * FROM figurante WHERE codSocio='$codiceSocioVecchio'";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
           
@@ -35,7 +35,7 @@ if ($totale == 1) {
 
         if (isset($uscita)&& !(empty($uscita))) {
 
-            $sql = "UPDATE figuranti SET uscita='$uscita' WHERE  codSocio='$codiceSocioVecchio' ";
+            $sql = "UPDATE figurante SET uscita='$uscita' WHERE codSocio='$codiceSocioVecchio' ";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
 
@@ -44,7 +44,7 @@ if ($totale == 1) {
        if (isset($recupero)&& !(empty($recupero))) {
 
         
-        $sql = "UPDATE figuranti SET mascheraRecupero='$recupero' WHERE  codSocio='$codiceSocioVecchio' ";
+        $sql = "UPDATE figurante SET mascheraRiserva='$recupero' WHERE codSocio='$codiceSocioVecchio' ";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
@@ -53,7 +53,7 @@ if ($totale == 1) {
    
    if (isset($uscitaEsterna)&& !(empty($uscitaEsterna))) {
 
-    $sql = "UPDATE figuranti SET uscitaEsterna='$uscitaEsterna' WHERE  codSocio='$codiceSocioVecchio' ";
+    $sql = "UPDATE figurante SET uscitaEsterna='$uscitaEsterna' WHERE  codSocio='$codiceSocioVecchio' ";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
 

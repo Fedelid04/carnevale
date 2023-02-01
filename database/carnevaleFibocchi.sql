@@ -16,7 +16,8 @@
 
 
 -- Dump della struttura del database carnevalefibocchi
-CREATE DATABASE IF NOT EXISTS `carnevalefibocchi` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+DROP DATABASE IF EXISTS carnevalefibocchi;
+CREATE DATABASE IF NOT EXISTS `carnevalefibocchi`;
 USE `carnevalefibocchi`;
 
 -- Dump della struttura di tabella carnevalefibocchi.carica

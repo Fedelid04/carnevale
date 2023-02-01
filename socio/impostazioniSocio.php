@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -11,17 +8,15 @@ session_start();
   <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/navBar.css">
+  <link rel="stylesheet" href="../css/NAVBAR2.css">
 </head>
 
 <body>
   <div class="container text-center" id="FormUpdate">
-    
-    <br>
     <form action="modificaSocio.php" method="post">
-
       <div class="form-row">
         <div class="form-group col-sm-6 offset-2">
-        <h3>Modifica Socio</h3>
+          <h3>Modifica Socio</h3>
           <label for="inputState">CodiceSocio</label>
           <select name="codiceSocio" class="form-control">
             <?php
@@ -41,8 +36,11 @@ session_start();
 
   </form>
   </div>
+  <?php
+  include 'navbarSocio.php';
+  ?>
   <script src="//code.jquery.com/jquery.js"></script>
-  <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+  <script src="../bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

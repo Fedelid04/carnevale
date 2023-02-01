@@ -1,13 +1,10 @@
-<?php
-include "../controlloRuolo.php";
-?>
+
 <?php
 
-include  "conn.php";
+include  "../conn.php";
 
 $figurante = $_POST['figurante'];
 
-$numeroRicevuta = $_POST['ricevuta'];
 
 $nome = $_POST['nome'];
 echo $nome;
@@ -39,8 +36,9 @@ echo '<br>';
 $carica = $_POST['carica'];
 echo $carica;
 echo '<br>';
+$tipoTessera = $_POST['tipologiaTessera'];
+echo $tipoTessera;
 echo '<br>';
-
 
 $sql = "SELECT codSocio FROM socio order by codSocio desc LIMIT 1";
 $stmt = $conn->prepare($sql);
@@ -54,10 +52,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $codiceSocio = $row['codSocio'];
 }
 $sql = "INSERT INTO socio values ('$codiceSocio','$nome','$cognome','$indirizzo','$citta','$provincia',
-'$cf','$cell','$dataIscrizione','$figurante','$staff');";
+'$cf','$cell','$dataIscrizione','$figurante','$staff','$carica');";
 $conn->query($sql);
-
-$tipoTessera = $_POST['tipologiaTessera'];
 
 $sql = "SELECT codTessera from tessera order by codTessera desc limit 1";
 $stmt = $conn->prepare($sql);
@@ -69,13 +65,10 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 }
 
 $sql = "INSERT INTO tessera values('$codTessera','$tipoTessera',DEFAULT);";
-$stmt = $con->prepare($sql);
+$stmt = $conn->prepare($sql);
 $stmt->execute();
 $totale = $stmt->rowCount();
 $sql = "INSERT INTO socio_tessera VALUES ('$codiceSocio','$codTessera',CURDATE());";
-$stmt = $conN->prepare($sql);
+$stmt = $conn->prepare($sql);
 $stmt->execute();
-if($figurante=="si"){
-    $sql="INSERT INTO figurante VALUES ('$codiceSocio','$codTessera'"
-}
 ?>

@@ -5,7 +5,7 @@ $codiceSocio = $_POST['codiceSocio'];
 try {
     include "../conn.php";
 
-    $sql = "   DELETE FROM figuranti WHERE codSocio='$codiceSocio';
+    $sql = "   DELETE FROM figurante WHERE codSocio='$codiceSocio';
     
                UPDATE socio SET figurante='no' WHERE codSocio='$codiceSocio'; 
                ";
