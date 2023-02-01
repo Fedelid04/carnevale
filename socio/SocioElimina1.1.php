@@ -1,8 +1,4 @@
-<?php
-  include "../controlloRuolo.php";
-?>
 <html lang="en">
-
 <head>
     <title>Elimina Socio</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">

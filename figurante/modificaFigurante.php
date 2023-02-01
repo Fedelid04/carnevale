@@ -1,6 +1,4 @@
-<?php
-  include "../controlloRuolo.php";
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,14 +30,14 @@
         include "../conn.php";
         try {
           $codSocio = $_GET['codSocio'];
-          $sql = "SELECT * FROM figuranti WHERE codSocio='$codSocio';";
+          $sql = "SELECT * FROM figurante WHERE codSocio='$codSocio';";
           $stmt = $conn->prepare($sql);
           $stmt->execute();
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $us = $row['uscita'];
             $use = $row['uscitaEsterna'];
-            $mBase = $row['mascheraBase'];
-            $mRec = $row['mascheraRecupero'];
+            $mBase = $row['codMaschera'];
+            $mRec = $row['mascheraRiserva'];
           }
         } catch (PDOException $e) {
           echo "Errore nella query...";
@@ -54,7 +52,6 @@
             <label for="maschera"></label>
             <select class="form-control" id="uscita" name="uscita">
               <option value="" disabled selected><?php echo 'uscita: ' . $us; ?></option>';
-              <option value=""> </option>
               <option value="si"> si </option>
               <option value="no"> no </option>
             </select>
@@ -63,7 +60,6 @@
             <label for="maschera"></label>
             <select class="form-control" id="uscitaEsterna" name="uscitaEsterna">
               <option value="" disabled selected><?php echo 'uscita esterna: ' . $use; ?></option>';
-              <option value=""> </option>
               <option value="si"> si </option>
               <option value="no"> no </option>
             </select>
@@ -72,15 +68,14 @@
             <label for="maschera"></label>
             <select class="form-control" id="maschera" name="maschera">
               <option value="" disabled selected><?php echo 'maschera recupero: ' . $mRec; ?></option>';
-              <option value=""> </option>
               <?php
               try {
                 include "../conn.php";
-                $sql = "SELECT nMaschera FROM maschera WHERE nMaschera NOT IN(SELECT mascheraRecupero FROM figuranti);";
+                $sql = "SELECT codMaschera FROM maschera WHERE codMaschera NOT IN(SELECT mascheraRiserva FROM figuranti);";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  echo ' <option value=' . $row['nMaschera'] . '>' . $row['nMaschera'] . '</option>';
+                  echo ' <option value='.$row['codMaschera'].'>'.$row['nMaschera'].'</option>';
                 }
               } catch (PDOException $e) {
                 echo "Errore nella query....<br/>";

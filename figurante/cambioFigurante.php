@@ -1,7 +1,4 @@
 <?php
-  include "../controlloRuolo.php";
-?>
-<?php
 
 include "../conn.php";
 

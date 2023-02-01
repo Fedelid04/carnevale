@@ -26,7 +26,6 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <h5 style="text-align: center;">Sezione soci</h5>
                                 <a class="dropdown-item" href="./socio/reportSocio.php">report socio</a>
-                                <!--<a class="dropdown-item" href="#">sezione soci</a>-->
                                 <?php
                                 if ($_SESSION['tipoCarica'] != "generica") {
                                     echo '<a class="dropdown-item" href="./socio/registraSocio.php">registrazione socio</a>';
@@ -48,7 +47,7 @@
                                     </a>';
                                     echo '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
                                     echo '<h5 style="text-align: center;">Sezione figuranti</h5>';
-                                    echo '<a class="dropdown-item" href="./figurante/gestioneFiguranti1.php">aggiungi figurante</a>';
+                                    echo '<a class="dropdown-item" href="./figurante/gestioneFiguranti.php">aggiungi figurante</a>';
                                     echo '<a class="dropdown-item" href="./figurante/impostazioniFigurante.php">modifica figurante</a>';
                                     echo '<a class="dropdown-item" href="./figurante/figuranteElimina.php">elimina figurante</a>';
                                     echo '</div>';

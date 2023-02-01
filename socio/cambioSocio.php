@@ -1,7 +1,5 @@
 <?php
-
-include  "conn.php";
-
+include "../conn.php";
 $codiceSocioVecchio=$_GET['codSocio'];
 echo $_GET['codSocio'];
 echo "<br>";
@@ -13,15 +11,9 @@ echo $cognome;
 echo '<br>';
 $cf =$_POST['cf'];
 echo $cf;
-//echo '<br>';
-//$cf2 =$_POST['cf2'];
-//echo $cf2;
 echo '<br>';
-$indirizzo= $_POST['indirizzo⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀'];
+$indirizzo= $_POST['indirizzo'];
 echo $indirizzo;
-echo '<br>';
-$numCiv =$_POST['numCiv'];
-echo $numCiv;
 echo '<br>';
 $citta =$_POST['citta'];
 echo $citta;
@@ -29,13 +21,10 @@ echo '<br>';
 $provincia =$_POST['provincia'];
 echo $provincia;
 echo '<br>';
-$email =$_POST['email'];
-echo $email;
-echo '<br>';
 $cell =$_POST['cell'];
 echo $cell;
 echo '<br>';
-$numeroTessera =$_POST['nTessera'];
+$numeroTessera=$_POST['nTessera'];
 echo $numeroTessera;
 echo '<br>';
 $nMaschera =$_POST['maschera'];
@@ -47,19 +36,14 @@ echo '<br>';
 $dataEvento =$_POST['dataEvento'];
 echo $dataEvento;
 echo '<br>';
-$annoPagato =$_POST['annoPagato'];
-echo $annoPagato;
-echo '<br>';
 $staff =$_POST['staff'];
 echo $staff;
-echo '<br>';
-$note =$_POST['note'];
-echo $note;
 echo '<br>';
 $carica=$_POST['carica'];
 echo $carica;
 echo '<br>';
 echo '<br>';
+
 
 
 
@@ -186,7 +170,7 @@ if (isset($cf2)&& !(empty($cf2))) {
 }
 
 
-if (isset($indirizzo⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀)&& !(empty($indirizzo⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀))) {
+if (isset($indirizzo)&& !(empty($indirizzo))) {
 
     $sql = "UPDATE socio SET indirizzo='$indirizzo' WHERE  codSocio ='$codiceSocioVecchio' ";
     $stmt = $conn->prepare($sql);

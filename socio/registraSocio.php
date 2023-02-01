@@ -1,6 +1,3 @@
-<?php
-include '../controlloRuolo.php';
-?>
 <html lang="en">
 
 <head>
@@ -13,9 +10,7 @@ include '../controlloRuolo.php';
 </head>
 
 <body>
-  <div class="container-fluid">
-    <a href="../home.php" class="btn btn-info" role="button">Home</a>
-  </div>
+
   <div class="container">
     <h3 style="text-align: center;">REGISTRAZIONE</h3>
     <form action="register.php" method="post" name="form" id="form" class="">
@@ -41,9 +36,16 @@ include '../controlloRuolo.php';
           <label for="">Città</label>
           <input name="citta" type="text" class="form-control" placeholder="Arezzo" required>
         </div>
+        <div class="form-group col-md-2">
+          <label for="staff">staff:</label>
+          <select class="form-control" id="staff" name="staff" required>
+            <option value="si"> si </option>
+            <option value="no"> no </option>
+          </select>
+        </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-sm-2">
+        <div class="form-group col-md-2">
           <label for="">Indirizzo</label>
           <input name="indirizzo" type="text" class="form-control" placeholder="Indirizzo" required>
         </div>
@@ -88,22 +90,15 @@ include '../controlloRuolo.php';
                     min="1920-01-01" max=' . $date . ' required class=form-control>';
           ?>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-2">
-          <label for="staff">staff:</label>
-          <select class="form-control" id="staff" name="staff" required>
-            <option value="si"> si </option>
-            <option value="no"> no </option>
-          </select>
-        </div>
         <div class="form-group col-md-2">
           <label for="figurante">figurante:</label>
           <select class="form-control" id="figurante" name="figurante" required onchange=mask()>
-            <option value="si">si</option>
             <option value="no">no</option>
+            <option value="si">si</option>
           </select>
         </div>
+      </div>
+      <div class="form-row">
         <div class="form-group col-md-2" id="SceltaMaschera" style="display:none;">
           <label for="">Scegli Maschera:</label>
           <select id="mascheraFigurante" name="mascheraFigurante" required class="form-control">
@@ -117,16 +112,13 @@ include '../controlloRuolo.php';
             ?>
           </select>
         </div>
-        <br>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="">‎</label>
-            <input class="form-control" type="reset" name="cancella" value="Annulla">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">‎</label>
-            <input type="submit" value="registra" class="form-control" id="registrazione">
-          </div>
+        <div class="form-group col-md-2">
+          <label for="">‎</label>
+          <input class="form-control" type="reset" name="cancella" value="Annulla">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="">‎</label>
+          <input type="submit" value="registra" class="form-control" id="registrazione">
         </div>
     </form>
   </div>
