@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,47 +18,24 @@
   $codSocio = $_GET['codSocio'];
   ?>
   <div class="container" id="FormUpdate">
-    <h1 style="text-align: center;">Modifica</h1>
+    <h1 style="text-align: center;">Modifica Figurante</h1>
     <form action="cambioFigurante.php?codSocio=<?=$codSocio?>" method="post">
       <div class="form-row">
         <?php
         $codSocio = $_GET['codSocio'];
         include "../conn.php";
         ?>
-        <?php
-        include "../conn.php";
-        try {
-          $codSocio = $_GET['codSocio'];
-          $sql = "SELECT * FROM figurante WHERE codSocio='$codSocio';";
-          $stmt = $conn->prepare($sql);
-          $stmt->execute();
-          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $us = $row['uscita'];
-            $use = $row['uscitaEsterna'];
-            $mBase = $row['codMaschera'];
-            $mRec = $row['mascheraRiserva'];
-          }
-        } catch (PDOException $e) {
-          echo "Errore nella query...";
-          echo $e->getMessage() . "<br/>";
-          die();
-        } finally {
-          $conn = null;
-        }
-        ?>
         <div class="form-row">
-          <div class="form-group col-sm-3">
-            <label for="maschera"></label>
+          <div class="form-group col-sm-5">
+            <label for="Uscita">Uscita</label>
             <select class="form-control" id="uscita" name="uscita">
-              <option value="" disabled selected><?php echo 'uscita: ' . $us; ?></option>';
               <option value="si"> si </option>
               <option value="no"> no </option>
             </select>
           </div>
-          <div class="form-group col-sm-4">
-            <label for="maschera"></label>
+          <div class="form-group col-sm-5">
+            <label for="Uscita Esterna">Uscita Es</label>
             <select class="form-control" id="uscitaEsterna" name="uscitaEsterna">
-              <option value="" disabled selected><?php echo 'uscita esterna: ' . $use; ?></option>';
               <option value="si"> si </option>
               <option value="no"> no </option>
             </select>
@@ -67,7 +43,6 @@
           <div class="form-group col-sm-4">
             <label for="maschera"></label>
             <select class="form-control" id="maschera" name="maschera">
-              <option value="" disabled selected><?php echo 'maschera recupero: ' . $mRec; ?></option>';
               <?php
               try {
                 include "../conn.php";
@@ -75,7 +50,7 @@
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  echo ' <option value='.$row['codMaschera'].'>'.$row['nMaschera'].'</option>';
+                  echo ' <option value='.$row['codMaschera'].'>'.$row['codMaschera'].'</option>';
                 }
               } catch (PDOException $e) {
                 echo "Errore nella query....<br/>";
@@ -87,14 +62,10 @@
               ?>
             </select>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <br>
+          <div class="form-group col-md-3">
             <input class="form-control" type="reset" name="cancella" value="Annulla">
           </div>
-          <div class="form-group col-md-6">
-            <br>
+          <div class="form-group col-md-3">
             <input type="submit" value="Modifica" class="form-control" id="Modifica">
           </div>
         </div>

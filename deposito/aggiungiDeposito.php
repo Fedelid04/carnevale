@@ -1,7 +1,5 @@
 
-<?php
-  include "../controlloRuolo.php";
-?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
