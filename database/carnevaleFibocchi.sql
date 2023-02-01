@@ -16,8 +16,7 @@
 
 
 -- Dump della struttura del database carnevalefibocchi
-DROP DATABASE IF EXISTS carnevalefibocchi;
-CREATE DATABASE `carnevalefibocchi`;
+CREATE DATABASE IF NOT EXISTS `carnevalefibocchi` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `carnevalefibocchi`;
 
 -- Dump della struttura di tabella carnevalefibocchi.carica
@@ -25,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `carica` (
   `codCarica` varchar(50) NOT NULL,
   `tipoCarica` varchar(25) NOT NULL,
   PRIMARY KEY (`codCarica`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella carnevalefibocchi.carica: ~4 rows (circa)
 INSERT INTO `carica` (`codCarica`, `tipoCarica`) VALUES
@@ -42,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `deposito` (
   PRIMARY KEY (`codDeposito`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.deposito: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.deposito: ~0 rows (circa)
 INSERT INTO `deposito` (`codDeposito`, `via`, `citta`) VALUES
 	('D1', 'Via calamandrei 2', 'Arezzo');
 
@@ -60,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `evento` (
   PRIMARY KEY (`codEvento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.evento: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.evento: ~0 rows (circa)
 INSERT INTO `evento` (`codEvento`, `descrizione`, `incassoEvento`, `requisito`, `via`, `citta`, `provincia`, `dataEvento`, `esterno`) VALUES
 	('E1', 'Mostra carri', 700, NULL, 'Via Dogas Bar 3', 'Arezzo', 'Arezzo', '2023-02-01', 'si');
 
@@ -92,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `figurante_manichino` (
   CONSTRAINT `figurante_manichino_ibfk_2` FOREIGN KEY (`codMaschera`) REFERENCES `maschera` (`codMaschera`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.figurante_manichino: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.figurante_manichino: ~0 rows (circa)
 INSERT INTO `figurante_manichino` (`codManichino`, `codMaschera`) VALUES
 	('MN1', 'MS2');
 
@@ -106,7 +105,12 @@ CREATE TABLE IF NOT EXISTS `galleria` (
   CONSTRAINT `galleria_ibfk_1` FOREIGN KEY (`codMaschera`) REFERENCES `maschera` (`codMaschera`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.galleria: ~0 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.galleria: ~4 rows (circa)
+INSERT INTO `galleria` (`codFoto`, `percorso`, `codMaschera`) VALUES
+	('FT1', 'IMG-62e3e2aa9ac4c3.38166641.png', 'MS1'),
+	('FT2', 'IMG-62e3e24ba90c74.36521260.png', 'MS2'),
+	('FT3', 'IMG-62fd11fc50a606.35870220.jpg', 'MS3'),
+	('FT4', 'IMG-62fd251b1989d1.73623807.jpg', 'MS4');
 
 -- Dump della struttura di tabella carnevalefibocchi.login
 CREATE TABLE IF NOT EXISTS `login` (
@@ -115,7 +119,12 @@ CREATE TABLE IF NOT EXISTS `login` (
   PRIMARY KEY (`codSocio`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.login: ~0 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.login: ~4 rows (circa)
+INSERT INTO `login` (`codSocio`, `psw`) VALUES
+	('SC1', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+	('SC2', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+	('SC3', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+	('SC4', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4');
 
 -- Dump della struttura di tabella carnevalefibocchi.manichino
 CREATE TABLE IF NOT EXISTS `manichino` (
@@ -127,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `manichino` (
   CONSTRAINT `manichino_ibfk_1` FOREIGN KEY (`codDeposito`) REFERENCES `deposito` (`codDeposito`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.manichino: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.manichino: ~0 rows (circa)
 INSERT INTO `manichino` (`codManichino`, `note`, `codDeposito`) VALUES
 	('MN1', 'sdraiato', 'D1');
 
@@ -142,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `manichino_evento` (
   CONSTRAINT `manichino_evento_ibfk_2` FOREIGN KEY (`codEvento`) REFERENCES `evento` (`codEvento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.manichino_evento: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.manichino_evento: ~0 rows (circa)
 INSERT INTO `manichino_evento` (`codManichino`, `codEvento`, `mascheraPrimaria`) VALUES
 	('MN1', 'E1', 'MS2');
 
@@ -157,23 +166,31 @@ CREATE TABLE IF NOT EXISTS `maschera` (
   PRIMARY KEY (`codMaschera`),
   KEY `codSarta` (`codSarta`),
   KEY `codDeposito` (`codDeposito`),
+  CONSTRAINT `FK_sarta` FOREIGN KEY (`codSarta`) REFERENCES `sarta` (`codSarta`),
   CONSTRAINT `maschera_ibfk_1` FOREIGN KEY (`codSarta`) REFERENCES `sarta` (`codSarta`),
   CONSTRAINT `maschera_ibfk_2` FOREIGN KEY (`codDeposito`) REFERENCES `deposito` (`codDeposito`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.maschera: ~4 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.maschera: ~8 rows (circa)
 INSERT INTO `maschera` (`codMaschera`, `colore`, `descrizione`, `riparazione`, `codSarta`, `codDeposito`) VALUES
-	('MS1', 'red', 'Arlecchino', 'no', 'S1', 'D1'),
+	('MS1', 'red', 'Arlecchino', 'si', 'S1', 'D1'),
 	('MS2', 'black', 'Pulcinella', 'si', 'S1', 'D1'),
 	('MS3', 'green', 'Burlamacco', 'no', 'S1', 'D1'),
-	('MS4', 'blue', 'Brighella', 'no', 'S2', 'D1');
+	('MS4', 'blue', 'Brighella', 'no', 'S2', 'D1'),
+	('MS5', '#ff0000', 'Mosaico', 'no', 'S1', 'D1'),
+	('MS6', '#dd31cf', 'Arlecchino', 'no', 'S2', 'D1'),
+	('MS7', '#ffdd00', 'Piumina', 'no', 'S1', 'D1'),
+	('MS8', '#000000', 'Malagioa', 'no', 'S1', 'D1');
 
 -- Dump della struttura di tabella carnevalefibocchi.pagamento_tessera
 CREATE TABLE IF NOT EXISTS `pagamento_tessera` (
-  `codTessera` varchar(50) NOT NULL,
+  `codPagamento` varchar(50) NOT NULL,
   `anno` year(4) NOT NULL,
   `dataPagamento` date NOT NULL,
-  PRIMARY KEY (`codTessera`)
+  `codTessera` varchar(50) NOT NULL,
+  PRIMARY KEY (`codPagamento`) USING BTREE,
+  KEY `FK_tessera` (`codTessera`),
+  CONSTRAINT `FK_tessera` FOREIGN KEY (`codTessera`) REFERENCES `tessera` (`codTessera`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella carnevalefibocchi.pagamento_tessera: ~0 rows (circa)
@@ -191,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `riparazione` (
   CONSTRAINT `riparazione_ibfk_2` FOREIGN KEY (`codSarta`) REFERENCES `sarta` (`codSarta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.riparazione: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.riparazione: ~0 rows (circa)
 INSERT INTO `riparazione` (`codMaschera`, `codSarta`, `inizioRiparazione`, `fineRiparazione`, `note`) VALUES
 	('MS2', 'S1', '2023-01-31', NULL, 'taglio');
 
@@ -294,17 +311,6 @@ INSERT INTO `tipo_tessera` (`idTipo`, `tipologia`, `prezzo`) VALUES
 	(1, 'membro onorario', 0),
 	(2, 'minorenne', 5),
 	(3, 'maggiorenne', 10);
-	
-INSERT INTO login VALUES('SC1' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
-('SC2' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
-('SC3' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
-('SC4' , '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4');
-
-INSERT INTO galleria VALUES
-('FT1','IMG-62e3e2aa9ac4c3.38166641.png','MS1'),
-('FT2','IMG-62e3e24ba90c74.36521260.png','MS2'),
-('FT3','IMG-62fd11fc50a606.35870220.jpg','MS3'),
-('FT4','IMG-62fd251b1989d1.73623807.jpg','MS4');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

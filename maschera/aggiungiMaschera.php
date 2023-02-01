@@ -21,18 +21,30 @@
     <h3 style="text-align: center;">AGGIUNGI MASCHERA</h3>
     <form action="registerMaschera.php" method="post" name="form" id="form" class="">
       <div class="form-row">
-        <div class="form-group col-sm-3">
-          <label for="deposito"> deposito:</label>
+        <div class="form-group col-sm-3 offset-2">
+          <label class="container text-center" for="descrizione">descrizione:</label><br>
+          <textArea id="descrizione" class="form-control" placeholder="descrizione" name="descrizione" maxlength="150"
+            required rows="1">
+          </textArea>
+        </div>
+        <div class="form-group col-md-2 offset-2">
+          <label class="container text-center" for="colore">colore:</label><br>
+          <input id="colore" class="form-control" name="colore" type="color">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3 offset-2">
+          <label class="container text-center" for="deposito"> deposito:</label>
           <select class="form-control" id="deposito" name="deposito">
             <?php
             try {
-              include  "../conn.php";
+              include "../conn.php";
               $sql = "SELECT * FROM deposito";
               $stmt = $conn->prepare($sql);
               $stmt->execute();
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo ' <option value=' . $row['codDeposito'] . '>';
-                echo $row['via'].' '.$row['citta'];
+                echo $row['via'] . ' ' . $row['citta'];
                 echo '</option>';
               }
             } catch (PDOException $e) {
@@ -45,8 +57,8 @@
             ?>
           </select>
         </div>
-        <div class="form-group col-sm-2">
-          <label for="sarta">sarta:</label>
+        <div class="form-group col-md-3 offset-2">
+          <label class="container text-center" for="sarta">sarta:</label>
           <select id="sarta" name="sarta" class="form-control">
             <?php
             try {
@@ -55,7 +67,7 @@
               $stmt = $conn->prepare($sql);
               $stmt->execute();
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo ' <option value=' . $row['codiceSarta'] . '>' . $row['nome'].' '.$row['cognome'].'</option>';
+                echo ' <option value=' . $row['codSarta'] . '>' . $row['nome'] . ' ' . $row['cognome'] . '</option>';
               }
             } catch (PDOException $e) {
               echo "Errore nella query....<br/>";
@@ -67,33 +79,24 @@
             ?>
           </select>
         </div>
-        <div class="form-group col-sm-3">
-          <label for="file">scegli immagine</label>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-8 offset-2">
+          <label class="container text-center" for="file">scegli immagine</label>
           <input class="form-control" type="file" id="file" class="file" name="my_image">
-          <p class="file-name"></p>
-        </div>
-        <div class="form-group col-sm-2">
-          <label for="colore">colore:</label><br>
-          <input id="colore" class="form-control" name="descrizione" type="color">
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-sm-2">
-          <label for="descrizione">descrizione:</label><br>
-          <textArea id="descrizione" class="form-control" placeholder="descrizione" name="descrizione" maxlength="150" required rows="1">
-          </textArea>
-        </div>
-        <div class="form-group col-md-2">
-          <label>‎</label>
+        <div class="form-group col-sm-2 offset-3">
           <input class="form-control" type="reset" name="cancella" value="Annulla">
         </div>
-        <div class="form-group col-md-2">
-          <label for="">‎</label>
+        <div class="form-group col-sm-2 offset-2">
           <input type="submit" value="registra" class="form-control" id="registrazione">
         </div>
       </div>
-      <script src="//code.jquery.com/jquery.js"></script>
-      <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+    </form>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

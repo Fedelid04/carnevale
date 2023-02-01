@@ -1,26 +1,28 @@
 <?php
-include "../controlloRuolo.php";
-?>
-<?php
 include  "../conn.php";
-
+$colore = $_POST['colore'];
 $deposito = $_POST['deposito'];
 $sarta = $_POST['sarta'];
 $descrizione = $_POST['descrizione'];
+$descrizione = trim($descrizione);
 
-
-$sql = "SELECT nMaschera FROM maschera order by nMaschera desc LIMIT 1";
+$sql = "SELECT codMaschera FROM maschera order by codMaschera desc LIMIT 1";
 $stmt = $conn->query($sql);
 $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    explode('A', $row['nMaschera']);
-    $row['nMaschera']++;
-    //implode('', $row['nMaschera']);
-    $nMaschera = $row['nMaschera'];
+    explode('S', $row['codMaschera']);
+    $row['codMaschera']++;    
+    $codMaschera = $row['codMaschera'];
 }
 
-$sql = "INSERT INTO maschera values ('$nMaschera','$descrizione','$deposito','$sarta',DEFAULT);";
-$stmt=$conn->query($sql);
+
+$sql = "INSERT INTO maschera values
+ ('$codMaschera', '$colore' , '$descrizione' , DEFAULT , '$sarta' , '$deposito');";
+echo $sql;
+
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+
 
 if (isset($_FILES['my_image'])) {
 
@@ -40,10 +42,16 @@ if (isset($_FILES['my_image'])) {
             $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
             $img_upload_path = '../uploads/' . $new_img_name;
             move_uploaded_file($tmp_name, $img_upload_path);
-
+            $sql = 'SELECT codFoto from galleria order by codFoto desc limit 1';
+            $stmt = $conn->query($sql);            
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            explode('T' , $row['codFoto']);
+            $row['codFoto']++;
+            $codFoto = $row['codFoto'];            
             // Insert into Database
+            echo '<script>alert(' . $codMaschera . ')</script>';
             $sql = "INSERT INTO galleria
-				        VALUES('$nMaschera','$new_img_name')";
+				        VALUES('$codFoto' , '$new_img_name' , '$codMaschera')";
 
             $stmt = $conn->prepare($sql);
             $stmt->execute();
@@ -55,9 +63,5 @@ if (isset($_FILES['my_image'])) {
         }
     }
 } else {
-    header("Location: aggiungiMaschera.php");
+   // header("Location: aggiungiMaschera.php");
 }
-echo "<pre>";
-print_r($_FILES['my_image']);
-echo "</pre>";
-header("Location: aggiungiMaschera.php");
