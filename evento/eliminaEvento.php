@@ -1,6 +1,4 @@
-<?php
-  include "../controlloRuolo.php";
-?>
+
 <?php
 /*
 $codiceEvento= $_GET['codiceEvento'];

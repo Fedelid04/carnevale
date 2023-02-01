@@ -1,6 +1,4 @@
-<?php
-  include "../controlloRuolo.php";
-?>
+
 <?php
 
 $numeroMasc = $_POST['nMaschera'];
