@@ -76,6 +76,6 @@ $sql = "INSERT INTO socio_tessera VALUES ('$codiceSocio','$codTessera',CURDATE()
 $stmt = $conN->prepare($sql);
 $stmt->execute();
 if($figurante=="si"){
-    $sql="INSERT INTO figurante VALUES ('$codiceSocio','$codTessera'"
+    $sql = "INSERT INTO figurante VALUES ('$codiceSocio','$codTessera'";
 }
 ?>

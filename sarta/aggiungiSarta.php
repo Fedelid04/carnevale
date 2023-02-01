@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,7 @@
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="../css/formStyle2.css">
+  <link rel="stylesheet" href="../css/navBar.css">
 </head>
 
 <body>
@@ -19,38 +18,40 @@
     <h3 style="text-align: center;">Aggiungi Sarta</h3>
     <form action="registerSarta.php" method="post" name="form" id="form" class="">
       <div class="form-row">
-        <div class="form-group col-sm-2">
-          <label for="codiceSarta">codice sarta:</label>
-          <input class="form-control" type="text" id="codiceSarta" placeholder="codice sarta (es SA1,SA2 ecc..)" name="codiceSarta" maxlength="50" required>
+        <div class="form-group col-md-2 offset-2">
+          <label class="container text-center" for="codiceSarta">nome: </label>
+          <input class="form-control" type="text" id="codiceSarta" placeholder="nome" name="nomeSarta" maxlength="50" required>
         </div>
-        <div class="form-group col-sm-2">
-          <label for="nome">nome sarta:</label>
-          <input class="form-control" type="text" id="nome" placeholder="nome" name="nome" maxlength="50" required>
+        <div class="form-group col-md-2 offset-1">
+          <label class="container text-center" for="nome">cognome:</label>
+          <input class="form-control" type="text" id="nome" placeholder="cognome" name="cognome" maxlength="50" required>
         </div>
 
-        <div class="form-group col-sm-2">
-          <label for="costo">costo all'ora:</label>
-          <input class="form-control" type="number" min="0" id="costo" placeholder="costo" name="costo" maxlength="50" required>
+        <div class="form-group col-md-2 offset-1">
+          <label class="container text-center" for="costo">costo all'ora:</label>
+          <input class="form-control" type="number" min="0" id="costo" 
+          placeholder="costo" name="costo" maxlength="50" required>
         </div>
-        <div class="form-group col-md-2">
-          <label>‎</label>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2 offset-3">
           <input class="form-control" type="reset" name="cancella" value="Annulla">
         </div>
-        <div class="form-group col-md-2">
-          <label>‎</label>
+        <div class="form-group col-md-2 offset-2">
           <input class="form-control" type="submit" value="registra" class="form-control" id="registrazione">
         </div>
-        <?php
-        if (isset($_GET['errore'])) {
-          $errore = $_GET['errore'];
+      </div>
+      <?php
+      if (isset($_GET['errore'])) {
+        $errore = $_GET['errore'];
 
-          if ($errore == 1) {
-            echo "<h1 class='errore' style=' width: 1000px;'>sarta già registrata </h1>";
-          }
+        if ($errore == 1) {
+          echo "<h1 class='errore' style=' width: 1000px;'>sarta già registrata </h1>";
         }
-        ?>
-        <script src="//code.jquery.com/jquery.js"></script>
-        <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+      }
+      ?>
+      <script src="//code.jquery.com/jquery.js"></script>
+      <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
