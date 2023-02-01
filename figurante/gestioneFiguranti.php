@@ -1,180 +1,111 @@
-<?php
-  include "../controlloRuolo.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>Registrazione Socio</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
-  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/formStyle.css">
+    <title>Registrazione Socio</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/navBar.css">
 </head>
 
 <body>
-
-  <section class="home-section">
-
-    <div class="home-content">
-      <i class='bx bx-menu'></i>
-
-
-
-      <div style="transform: translateX(90px);">
-        <form action="registerFigurante1.php" method="post" name="form" id="form" class="" style="transform: translateY(320px); width:1200px;">
-          <?php
-          /*echo '<a href="impostazioniFigurante.php" style="
-border-radius: 20px;
-padding: 0 10px;
-min-width: 10vw;
-min-height: 4.5vh;
-background-color: rgba(28, 206, 250, 0);
-color: black;
-border: 4px solid black;
-transition: .4s;
-text-decoration: none;
-font-size: 1.3em;
-font-weight: 400;
-text-transform: uppercase;
-transform: translateX(370px);
-transition: background-color .4s, color .4s;
-letter-spacing: 2px;
-curser: pointer;
-">IMPOSTAZIONI FIGURANTE</a>';*/
-          ?>
-          <fieldset class="fieldsetSocioRegistrazione" style="width: 1120px;transform: translateX(-155px);
-    position: relative;
-    bottom: 45px;">
-
-            <?php
-            if (isset($_GET['errore'])) {
-              $errore = $_GET['errore'];
-
-              if ($errore == 1) {
-                echo "<br><div class='errore' style=' width: 600px;'>figurante già registrato </div><br>";
-              } elseif ($errore == 2) {
-                echo "<br><div class='errore' style=' width: 600px;'>maschera di recupero occupata </div><br>";
-              }
-            }
-            ?>
-            <h1>AGGIUNGI FIGURANTE</h1>
-            <hr style="transform: translateY(15px); color:white; height:3px;">
-            <br>
-
-            <label for="codSocio">codice socio:</label>
-
-            <select id="codSocio" name="codSocio" required style="transform: translateX(10px);">
-
-              <?php
-
-              try {
-                include "../conn.php";
-
-
-
-                $sql = "SELECT codSocio FROM socio WHERE figurante='no'";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-
-
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  echo ' <option value=' . $row['codSocio'] . '>' . $row['codSocio'] . '</option>';
-                }
-              } catch (PDOException $e) {
-                echo "Errore nella query....<br/>";
-                echo $e->getMessage() . "<br/>";
-                die();
-              } finally {
-                $conn = null;
-              }
-
-              ?>
-            </select>
-            <br>
-            <br>
-
-            <label for="recupero">maschera secondaria:</label>
-
-            <select id="recupero" name="recupero">
-
-              <?php
-
-              try {
-                include "../conn.php";
-
-                $sql = "SELECT nMaschera FROM maschera WHERE riparazione='no' AND  nMaschera NOT IN(SELECT mascheraRecupero FROM figuranti); ";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-
-
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  echo ' <option value=' . $row['nMaschera'] . '>' . $row['nMaschera'] . '</option>';
-                }
-              } catch (PDOException $e) {
-                echo "Errore nella query....<br/>";
-                echo $e->getMessage() . "<br/>";
-                die();
-              } finally {
-                $conn = null;
-              }
-
-              ?>
-            </select>
-
-            <br>
-            <br>
-
-            <label for="uscita">uscita:</label>
-
-            <select id="uscita" name="uscita" required style="transform: translateX(38px);">
-              <option value="si"> si </option>
-              <option value="no"> no </option>
-            </select>
-            <br>
-            <br>
-
-            <label for="uscitaEsterna">uscita esterna:</label>
-
-            <select id="uscitaEsterna" name="uscitaEsterna" required style="transform: translateX(0px);">
-              <option value="si"> si </option>
-              <option value="no"> no </option>
-            </select>
-            <br>
-            <br>
-            <div><input style="margin-bottom:5px; left:0%; bottom:0px;" type="submit" value="registra" class='submit' id="registrazione">
-              <br>
-              <input type="reset" name="cancella" value="Annulla">
-            </div>
-
-          </fieldset>
-
-        </form>
-
-      </div>
+    <div class="container-fluid">
+        <a href="../home.php" class="btn btn-info" role="button">Home</a>
     </div>
+    <div class="container">
+        <h3 style="text-align: center;">AGGIUNGI FIGURANTE</h3>
+        <form action="registerFigurante1.php" method="post" name="form" id="form" class="">
+            <div class="form-row">
+                <div class="form-group col-sm-2">
+                    <label for="codSocio">codice socio:</label>
+                    <select id="codSocio" name="codSocio" class="form-control" required>
+                        <?php
+                        try {
+                            include "../conn.php";
+                            $sql = "SELECT codSocio FROM socio";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->execute();
+                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                echo ' <option value='.$row['codSocio'].'>'.$row['codSocio'].'</option>';
+                            }
+                        } catch (PDOException $e) {
+                            echo "Errore nella query....<br/>";
+                            echo $e->getMessage() . "<br/>";
+                            die();
+                        } finally {
+                            $conn = null;
+                        }
 
+                        ?>
+                    </select>
+                </div>
 
+                <div class="form-group col-md-2" id="SceltaMaschera">
+                    <label for="">Scegli Maschera:</label>
+                    <select id="mascheraFigurante" name="mascheraFigurante" required class="form-control">
+                        <?php
+                        include '../conn.php';
+                        $sql = "SELECT * from maschera;";
+                        $stmt = $conn->query($sql);
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="'.$row['codMaschera'].'">'.$row['codMaschera'] .'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
 
+                <div class="form-group col-md-2" id="SceltaMaschera">
+                    <label for="">Maschera Riserva:</label>
+                    <select id="mascheraFigurante" name="mascheraRiserva" required class="form-control">
+                        <?php
+                        include '../conn.php';
+                        $sql = "SELECT * from maschera;";
+                        $stmt = $conn->query($sql);
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="' . $row['codMaschera'] . '">' . $row['codMaschera'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="uscita">uscita:</label>
+                    <select class="form-control" id="uscita" name="uscita" required>
+                        <option value="si"> si </option>
+                        <option value="no"> no </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="uscitaEsterna">uscita esterna:</label>
+                    <select class="form-control" id="uscitaEsterna" name="uscitaEsterna" required>
+                        <option value="si"> si </option>
+                        <option value="no"> no </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>‎</label>
+                    <input class="form-control" type="reset" name="cancella" value="Annulla">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="">‎</label>
+                    <input type="submit" value="registra" class="form-control" id="registrazione">
+                </div>
+                <div class="container-fluid" style="text-align:center">
+                    <?php
+                    if (isset($_GET['errore'])) {
+                        $errore = $_GET['errore'];
 
-
-    </div>
-  </section>
-  <script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-      arrow[i].addEventListener("click", (e) => {
-        let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-        arrowParent.classList.toggle("showMenu");
-      });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("close");
-    });
-  </script>
+                        if ($errore == 1) {
+                            echo "<br><div class='errore'>figurante già registrato </div><br>";
+                        } elseif ($errore == 2) {
+                            echo "<br><div class='errore'>maschera di recupero occupata </div><br>";
+                        }
+                    }
+                    ?>
+                </div>
+                <script src="//code.jquery.com/jquery.js"></script>
+                <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 
 </body>
 

@@ -18,7 +18,6 @@
 
 <body>
     <?php
-    
     include 'sideBar.php';
     ?>
     <div class="container" id="anteprima">
@@ -36,7 +35,7 @@
                 echo '<div class="col-sm-4">
                             <img class="project__image" src="uploads/' . $row['percorso'] . '" />
                             <br><br><br><br><br><br><br><br>
-                            <div id="col-sm-4" >
+                            <div id="col-sm-4">
                             numero maschera: ' . $row['codFoto'] . '
                             </div>
                             </div>';

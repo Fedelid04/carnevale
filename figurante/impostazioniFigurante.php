@@ -1,6 +1,4 @@
-<?php
-  include "../controlloRuolo.php";
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +27,7 @@
         <?php
         include "../conn.php";
         try {
-          $sql = "SELECT codSocio,uscita FROM figuranti";
+          $sql = "SELECT * FROM figurante";
           $stmt = $conn->prepare($sql);
           $stmt->execute();
         ?>

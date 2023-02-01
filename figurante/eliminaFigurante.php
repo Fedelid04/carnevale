@@ -1,7 +1,4 @@
 <?php
-  include "../controlloRuolo.php";
-?>
-<?php
 
 $codiceSocio = $_POST['codiceSocio'];
 
