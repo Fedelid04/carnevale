@@ -20,16 +20,16 @@
     <form action="eliminaMaschera.php" method="post">
       <div class="form-row">
         <div class="form-group col-sm-6 mx-auto" style="text-align: center;">
-          <label for="">nMaschera</label>
-          <select name="nMaschera" class="form-control">
+          <label for="">Seleziona la Maschera</label>
+          <select name="codMaschera" class="form-control" style="color:inherit;">
             <?php
             try {
               include  "../conn.php";
-              $sql = "SELECT  * FROM maschera";
+              $sql = "SELECT  * FROM maschera where eliminato = 'no'";
               $stmt = $conn->prepare($sql);
               $stmt->execute();
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo ' <option value=' . $row['nMaschera'] . '>' . $row['nMaschera'] . '</option>';
+                echo ' <option value=' . $row['codMaschera'] . ' style="color:'.$row['colore'].';">'.$row['codMaschera'].' '. $row['descrizione'] . '</option>';
               }
             } catch (PDOException $e) {
               echo "Errore nella query....<br/>";

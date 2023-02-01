@@ -19,7 +19,7 @@
   </div>
   <div class="container">
     <h3 style="text-align: center;">AGGIUNGI MASCHERA</h3>
-    <form action="registerMaschera.php" method="post" name="form" id="form" class="">
+    <form action="registerMaschera.php" method="post" enctype="multipart/form-data" id="form" ">
       <div class="form-row">
         <div class="form-group col-sm-3 offset-2">
           <label class="container text-center" for="descrizione">descrizione:</label><br>
@@ -82,8 +82,8 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-8 offset-2">
-          <label class="container text-center" for="file">scegli immagine</label>
-          <input class="form-control" type="file" id="file" class="file" name="my_image">
+          <label class="container text-center">scegli immagine</label>
+          <input class="form-control" type="file" name="my_image">
         </div>
       </div>
       <div class="form-row">
