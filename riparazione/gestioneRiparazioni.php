@@ -10,7 +10,7 @@
 
 <body>
     <div class="container">
-        <div class="table-responsive-md" <div class="row">
+        <div class="table-responsive-sm" <div class="row">
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
