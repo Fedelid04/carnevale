@@ -21,6 +21,14 @@
     include 'sideBar.php';
     ?>
     <div class="container" id="anteprima">
+        <?php
+            if(isset($_GET['errore'])){
+            $errore = $_GET['errore'];
+                if($errore==1){
+                    echo '<script>alert("Tessera già segnalata");</script>';
+                }
+            }
+        ?>
         <h3>ANTEPRIMA FOTO </h3>
         <?php
         try {
