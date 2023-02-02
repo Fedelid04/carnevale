@@ -68,7 +68,7 @@
         </div>
         <div class="form-group col-sm-2 mx-auto">
           <label for="sarta">sarta:</label>
-          <select id="sarta" name="codSarta" class="form-control" >
+          <select id="sarta" name="codSarta" class="form-control">
             <?php
             try {
               include "../conn.php";
@@ -78,7 +78,6 @@
               $row = $stmt->fetch(PDO::FETCH_ASSOC);
               $codSarta = $row['codSarta'];
               echo ' <option value=' . $row['codSarta'] . '>' . $row['codSarta'] . ' ' . $row['nome'] . ' ' . $row['cognome'] . '</option>';
-
             } catch (PDOException) {
               echo "Errore nella query....<br/>";
               echo $e->getMessage() . "<br/>";
@@ -115,8 +114,9 @@
                 echo '<option value="' . $row['riparazione'] . '">' . $row['riparazione'] . '</option>';
                 echo '<option value="si">si</option>';
               } else {
-                echo '<option value="si">si</option>';
+
                 echo '<option value="' . $row['riparazione'] . '">' . $row['riparazione'] . '</option>';
+                echo '<option value="no">no</option>';
               }
             } catch (PDOException $e) {
               echo "Errore nella query....<br/>";
@@ -128,8 +128,7 @@
         </div>
         <div class="form-group col-sm-3 mx-auto">
           <label for="descrizione">descrizione:</label><br>
-          <textArea id="descrizione" class="form-control" placeholder="descrizione" name="descrizione" maxlength="150"
-            required rows="1">
+          <textArea id="descrizione" class="form-control" placeholder="descrizione" name="descrizione" maxlength="150" required rows="1">
             <?php
             include '../conn.php';
             $sql = "SELECT descrizione from maschera where codMaschera like '$_GET[codMaschera]'";
@@ -145,14 +144,14 @@
         <div class="form-group col-sm-3 mx-auto">
           <label>Colore:</label>
           <?php
-            include '../conn.php';
-            $sql = "SELECT colore from maschera where codMaschera like '$_GET[codMaschera]'";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-          echo '<input type="color" class="form-control" id="colore" name="colore" value="'.$row['colore'].'">';
-          ?>          
-        </div>        
+          include '../conn.php';
+          $sql = "SELECT colore from maschera where codMaschera like '$_GET[codMaschera]'";
+          $stmt = $conn->prepare($sql);
+          $stmt->execute();
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          echo '<input type="color" class="form-control" id="colore" name="colore" value="' . $row['colore'] . '">';
+          ?>
+        </div>
         <div class="form-group col-md-2 mx-auto">
           <label>‎</label>
           <input class="form-control" type="reset" name="cancella" value="Annulla">

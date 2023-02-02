@@ -10,10 +10,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/navBar.css">
-
     <link href="./bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/navBar.css" media="screen">
 </head>
 
 <body>

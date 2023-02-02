@@ -2,7 +2,6 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
-html,
 body {
   font-family: "HelveticaRoman", sans-serif;
   font-size: 14px;
@@ -227,8 +226,8 @@ li a:hover:not(.active) {
 }
 
 @media (max-width: 320px) {
-  .banner-alto {
-    padding-top: 0px;
+  body{
+    background-image: url('../imgs/Carnevale-Figli-di-Bocco-1.jpg');
   }
 
   .logo {
