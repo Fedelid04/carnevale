@@ -1,53 +1,26 @@
-
 <?php
+include '../conn.php';
+$sql = "SELECT codEvento FROM evento";
+$stmt = $conn->query($sql);
+$stmt->execute();
+$tmp = 0;
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  $codEvento = explode('E', $row['codEvento'])[1];
+  if ($codEvento > $tmp) {
+    $tmp = $codEvento;
+  }
+}
+$tmp++;
+$codEvento = 'E' . $tmp;
+echo "c".$_POST['requisito']."iao";
+if($_POST['requisito'] === ''){  
+  $sql = "INSERT INTO evento values ('$codEvento' , '$_POST[descrizione]' , $_POST[importo] ,
+ null , '$_POST[via]' , '$_POST[citta]' ,'$_POST[provincia]', '$_POST[data]' , '$_POST[esterna]')";
+} else {
+  $sql = "INSERT INTO evento values ('$codEvento' , '$_POST[descrizione]' , $_POST[importo] ,
+ '$_POST[requisito]' , '$_POST[via]' , '$_POST[citta]' ,'$_POST[provincia]', '$_POST[data]' , '$_POST[esterna]')";
+}
 
-include "../conn.php";
-
-$codiceEvento=$_POST['codiceEvento'];
-$provincia=$_POST['provincia'];
-$citta=$_POST['citta'];
-$comune=$_POST['comune'];
-$incasso=$_POST['incasso'];
-$data=$_POST['data'];
-$descrizione=$_POST['note'];
-  
-        $sql = "SELECT codiceEvento FROM evento
-         WHERE codiceEvento = '$codiceEvento'  LIMIT 1";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $totale = $stmt->rowCount();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo '<br>';
-         
-        }
-
-        if ($totale == 1) {
-           
-            header("Location: aggiungiEvento.php?errore=1", true, 301);
-            exit();
-        
-      }else{
-
-            
-       
-
-       
-        $query = " INSERT INTO evento
-         VALUES('$codiceEvento','$descrizione','$data','$provincia','$citta','$comune',$incasso);
-           ";
-       
-        
-           if($conn->query($query)==true){
-              
-             header("Location: aggiungiEvento.php", true, 301);
-              exit();
-           }else{
-              
-               echo "errore registrazione $query ".$conn->error;
-           
-           } 
-            
-
-   }
+$conn->query($sql);
+header('Location: ./aggiungiEvento');
+?>

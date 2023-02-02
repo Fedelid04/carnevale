@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `deposito` (
   PRIMARY KEY (`codDeposito`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.deposito: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.deposito: ~0 rows (circa)
 INSERT INTO `deposito` (`codDeposito`, `via`, `citta`) VALUES
 	('D1', 'Via calamandrei 2', 'Arezzo');
 
@@ -63,9 +63,10 @@ CREATE TABLE IF NOT EXISTS `evento` (
   PRIMARY KEY (`codEvento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.evento: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.evento: ~2 rows (circa)
 INSERT INTO `evento` (`codEvento`, `descrizione`, `incassoEvento`, `requisito`, `via`, `citta`, `provincia`, `dataEvento`, `esterno`) VALUES
-	('E1', 'Mostra carri', 700, NULL, 'Via Dogas Bar 3', 'Arezzo', 'Arezzo', '2023-02-01', 'si');
+	('E1', 'Mostra carri', 700, NULL, 'Via Dogas Bar 3', 'Arezzo', 'Arezzo', '2023-02-01', 'si'),
+	('E2', 'Grandi statue', 554, NULL, 'Via fossa buca', 'ROMA', 'Arezzo', '2023-02-04', 'si');
 
 -- Dump della struttura di tabella carnevalefibocchi.figurante
 DROP TABLE IF EXISTS `figurante`;
@@ -145,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `manichino` (
   CONSTRAINT `manichino_ibfk_1` FOREIGN KEY (`codDeposito`) REFERENCES `deposito` (`codDeposito`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.manichino: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.manichino: ~0 rows (circa)
 INSERT INTO `manichino` (`codManichino`, `note`, `codDeposito`) VALUES
 	('MN1', 'sdraiato', 'D1');
 
@@ -161,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `manichino_evento` (
   CONSTRAINT `manichino_evento_ibfk_2` FOREIGN KEY (`codEvento`) REFERENCES `evento` (`codEvento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.manichino_evento: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.manichino_evento: ~0 rows (circa)
 INSERT INTO `manichino_evento` (`codManichino`, `codEvento`, `mascheraPrimaria`) VALUES
 	('MN1', 'E1', 'MS2');
 
@@ -222,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `riparazione` (
   CONSTRAINT `riparazione_ibfk_2` FOREIGN KEY (`codSarta`) REFERENCES `sarta` (`codSarta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.riparazione: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.riparazione: ~0 rows (circa)
 INSERT INTO `riparazione` (`codMaschera`, `codSarta`, `inizioRiparazione`, `fineRiparazione`, `note`) VALUES
 	('MS2', 'S1', '2023-01-31', NULL, 'taglio');
 
@@ -257,18 +258,20 @@ CREATE TABLE IF NOT EXISTS `socio` (
   `staff` set('si','no') DEFAULT 'no',
   `codCarica` varchar(50) NOT NULL,
   `eliminato` set('si','no') DEFAULT 'no',
+  `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`codSocio`),
   KEY `codCarica` (`codCarica`),
   CONSTRAINT `socio_ibfk_1` FOREIGN KEY (`codCarica`) REFERENCES `carica` (`codCarica`),
   CONSTRAINT `socio_ibfk_2` FOREIGN KEY (`codCarica`) REFERENCES `carica` (`codCarica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.socio: ~4 rows (circa)
-INSERT INTO `socio` (`codSocio`, `nome`, `cognome`, `via`, `citta`, `provincia`, `cf`, `cell`, `dataIscrizione`, `figurante`, `staff`, `codCarica`, `eliminato`) VALUES
-	('SC1', 'caio', 'ROMA', 'Guido Monaco', 'A', 'Arezzo', 'RSSMRA80A01A390R', '23423', '2023-01-31', 'no', 'no', 'C1', 'no'),
-	('SC2', 'Michele', 'Brunostrati', 'Via Governo 22B', 'Bibbiena', 'Arezzo', 'MCHBNS80A01A851Q', '675314312', '2023-01-31', 'si', 'si', 'C1', 'si'),
-	('SC3', 'caio', 'GEPPETTO', 'Guido Monaco', 'A', 'Arezzo', 'CRSLNS04S21A509G', '213432', '2023-01-31', 'no', 'no', 'C4', 'no'),
-	('SC4', 'caio', 'GEPPETTO', 'Guido Monaco', 'efwff', 'ffff', 'CRSLNS04S21A509G', '21334', '2023-02-02', 'no', 'si', 'C2', 'no');
+-- Dump dei dati della tabella carnevalefibocchi.socio: ~5 rows (circa)
+INSERT INTO `socio` (`codSocio`, `nome`, `cognome`, `via`, `citta`, `provincia`, `cf`, `cell`, `dataIscrizione`, `figurante`, `staff`, `codCarica`, `eliminato`, `email`) VALUES
+	('SC1', 'caio', 'ROMA', 'Guido Monaco', 'A', 'Arezzo', 'RSSMRA80A01A390R', '23423', '2023-01-31', 'no', 'no', 'C1', 'no', NULL),
+	('SC2', 'Michele', 'Brunostrati', 'Via Governo 22B', 'Bibbiena', 'Arezzo', 'MCHBNS80A01A851Q', '675314312', '2023-01-31', 'si', 'si', 'C1', 'si', NULL),
+	('SC3', 'caio', 'GEPPETTO', 'Guido Monaco', 'A', 'Arezzo', 'CRSLNS04S21A509G', '213432', '2023-01-31', 'no', 'no', 'C4', 'no', NULL),
+	('SC4', 'caio', 'GEPPETTO', 'Guido Monaco', 'efwff', 'ffff', 'CRSLNS04S21A509G', '21334', '2023-02-02', 'no', 'si', 'C2', 'no', NULL),
+	('SC5', 'Falier', 'Biagioni', 'Via setteponti 92/A', 'Castiglion Fibocchi', 'Arezzo', 'BGNFLR78B11A390R', '3409127619', '2000-01-11', 'si', 'si', 'C4', 'no', NULL);
 
 -- Dump della struttura di tabella carnevalefibocchi.socio_evento
 DROP TABLE IF EXISTS `socio_evento`;
@@ -310,7 +313,8 @@ INSERT INTO `tessera` (`codTessera`, `idTipo`, `attiva`, `codSocio`, `dataErogaz
 	('TS2', 1, 'no', 'SC2', '2023-02-02'),
 	('TS3', 3, 'si', 'SC3', '2023-02-02'),
 	('TS4', 3, 'si', 'SC4', '2023-02-02'),
-	('TS5', 1, 'si', 'SC2', '2023-02-02');
+	('TS5', 1, 'si', 'SC2', '2023-02-02'),
+	('TS6', 3, 'si', 'SC5', '2023-02-02');
 
 -- Dump della struttura di tabella carnevalefibocchi.tipo_tessera
 DROP TABLE IF EXISTS `tipo_tessera`;

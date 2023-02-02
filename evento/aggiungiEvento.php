@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,65 +15,80 @@
     <a href="../home.php" class="btn btn-info" role="button">Home</a>
   </div>
   <div class="container">
-    <h3 style="text-align: center;">AGGIUNGI EVENTO</h3>
-    <form action="registerEvento.php" method="post" name="form" id="form" class="">
+    <form action="registerEvento.php" method="POST">
       <div class="form-row">
-        <div class="form-group col-sm-2">
-          <label for="codiceEvento">codice evento</label>
-          <input type="text" class="form-control" id="codiceEvento" placeholder="codice evento (es EV1,1V2 ecc..)" name="codiceEvento" required>
+        <div class="form-group col-md-3 mx-auto">
+          <label class="container text-center">Descrizione Evento</label>
+          <input type="text" class="form-control" id="name" name="descrizione">
         </div>
-        <div class="form-group col-sm-2">
-          <label for="citta">citta evento:</label>
-          <input type="text" class="form-control" id="citta" placeholder="citta" name="citta" maxlength="50" required>
+        <div class="form-group col-md-3 mx-auto">
+          <label class="container text-center">Via</label>
+          <input type="text" class="form-control" id="via" name="via">
         </div>
-        <div class="form-group col-sm-2">
-          <label for="incasso">incasso:</label>
-          <input type="text" class="form-control" id="incasso" placeholder="incasso" name="incasso" maxlength="50" required>
+        <div class="form-group col-md-3 mx-auto">
+          <label class="container text-center">Citta</label>
+          <input type="text" class="form-control" id="citta" name="citta">
         </div>
-        <div class="form-group col-md-2">
-
-          <label for="provincia">provincia evento</label>
-          <input type="text" class="form-control" id="provincia" placeholder="provincia" name="provincia" maxlength="50" required>
-        </div>
-        <div class="form-group col-md-2">
-
-          <label for="comune">comune evento</label>
-          <input type="text" class="form-control" id="comune" placeholder="comune" name="comune" maxlength="50" required>
-        </div>
-        <div class="form-group col-md-2">
-          <?php
-          date_default_timezone_get();
-          $date = date('Y-m-d', time());
-          ?>
-          <label>Data inizio noleggio</label>
-
-          <input class="form-control" type="date" required id="dataIniziale" name="dataIniziale" placeholder="data" <?php echo 'min=' . $date . '' ?> required>
-
-
+        <div class="form-group col-md-3 mx-auto">
+          <label class="container text-center">Provincia</label>
+          <input type="text" class="form-control" id="provincia" name="provincia">
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-6 ">
-          <label for="descrizione"> descrizione:</label> <br>
-          <textArea id="note" placeholder="note" name="note" required rows="3" class="form-control">
-                    </textArea>
+        <div class="form-group col-md-3 mx-auto">
+          <label class="container text-center">Evento esterno</label>
+          <select class="form-control" name="esterna" id="esterno">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3 mx-auto">
+          <label class="container text-center">Inserire data evento</label>
+          <input type="date" class="form-control" id="data" name="data">
+        </div>
+      </div>
+      <div class="form-row">
+
+        <div class="form-group col-md-3 mx-auto">
+          <label class="container text-center">Requisito</label>
+          <input class="form-control" type="text" id="input-field" placeholder="es Arlecchino..." name="requisito">
+        </div>
+        <div class="form-check col-md-2 mx-auto">
+          <br>
+          <input class="form-check-input" type="radio" id="text-input" name="input-type" value="text" checked>
+          <label class="form-check-label" for="text-input">Tipo Maschera</label>
+          <br>
+          <input class="form-check-input" type="radio" id="color-input" name="input-type" value="color">
+          <label class="form-check-label" for="color-input">Colore</label>
+        </div>
+        <script>
+          var textInput = document.getElementById("text-input");
+          var colorInput = document.getElementById("color-input");
+          var inputField = document.getElementById("input-field");
+
+          textInput.addEventListener("click", function () {
+            inputField.type = "text";
+            inputField.value = null;
+          });
+
+          colorInput.addEventListener("click", function () {
+            inputField.type = "color";
+          });
+        </script>
+        <div class="form-group col-md-3 mx-auto">
+          <label class="container text-center">Importo</label>
+          <input type="text" class="form-control" id="importo" name="importo">
         </div>
       </div>
 
       <div class="form-row">
-        <div class="form-group col-md-4">
-          <label>‎</label>
-          <input class="form-control" type="reset" name="cancella" value="Annulla">
+        <div class="form-group col-md-2  mx-auto">
+          <input type="submit" class="btn btn-success" value="Aggiungi">
         </div>
-        <div class="form-group col-md-4 offset-md-2">
-          <label for="">‎</label>
-          <input type="submit" value="registra" class="form-control" id="registrazione">
-        </div>
-      </div>
-      <script src="//code.jquery.com/jquery.js"></script>
-      <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
-
-
+    </form>
+  </div>
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
