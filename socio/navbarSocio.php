@@ -98,7 +98,7 @@ session_start();
                     <a class="dropdown-item" href="../riparazione/segnalazione.php">Segnalazione riparazione</a>
                     <?php
                     if ($_SESSION['tipoCarica'] != "generica") {
-                        echo '<a class="dropdown-item" href="./maschera/aggiungiMaschera.php">aggiungi maschera</a>
+                        echo '<a class="dropdown-item" href="../maschera/aggiungiMaschera.php">aggiungi maschera</a>
                                             <a class="dropdown-item" href="../maschera/mascheraElimina.php">elimina maschera</a>
                                             <a class="dropdown-item" href="../riparazione/gestioneRiparazioni.php">gestione riparazione
                                             maschera</a>

@@ -50,18 +50,7 @@ $codSocio = 'SC' . $tmp;
 $sql = "INSERT INTO socio values ('$codSocio','$nome','$cognome','$indirizzo','$citta','$provincia',
 '$cf','$cell','$dataIscrizione','$figurante','$staff','$carica',DEFAULT);";
 $stmt = $conn->query($sql);
-$tmp = 0;
-$sql = "SELECT codTessera FROM tessera";
-$stmt = $conn->query($sql);
-$stmt->execute();
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $codTessera = explode('TS', $row['codTessera'])[1];
-    if ($codTessera > $tmp) {
-        $tmp = $codTessera;
-    }
-}
-$tmp++;
-$codTessera ='TS'.$tmp;
+$codTessera = $_POST['codTessera'];
 $sql = "INSERT INTO tessera VALUES ('$codTessera','$tipoTessera',DEFAULT,'$codSocio',CURDATE());";
 $stmt = $conn->prepare($sql);
 $stmt->execute();

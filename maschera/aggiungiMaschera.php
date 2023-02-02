@@ -19,12 +19,15 @@
   </div>
   <div class="container">
     <h3 style="text-align: center;">AGGIUNGI MASCHERA</h3>
-    <form action="registerMaschera.php" method="post" enctype="multipart/form-data" id="form" ">
+    <form action="registerMaschera.php" method="post" enctype="multipart/form-data" id="form">
+      <div class="form-group col-md-3 mx-auto">
+        <label class="container text-center" for="numeroMaschera">numMaschera:</label><br>
+        <input id="numeroMaschera" class="form-control" name="numeroMaschera" type="text">
+      </div>
       <div class="form-row">
         <div class="form-group col-md-3 mx-auto">
           <label class="container text-center" for="descrizione">descrizione:</label><br>
-          <textArea id="descrizione" class="form-control" placeholder="descrizione" name="descrizione" maxlength="150"
-            required rows="1">
+          <textArea id="descrizione" class="form-control" placeholder="descrizione" name="descrizione" maxlength="150" required rows="1">
           </textArea>
         </div>
         <div class="form-group col-md-1 mx-auto">
