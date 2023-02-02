@@ -2,13 +2,8 @@
 $codiceSocio = $_POST['codiceSocio'];
 try {
     include "../conn.php";
-    $sql = "   DELETE FROM socio_tessera WHERE codSocio='$codiceSocio';
-               DELETE FROM socio_evento WHERE codSocio='$codiceSocio';
-               DELETE FROM figurante WHERE codSocio='$codiceSocio'; 
-               DELETE FROM socio WHERE codSocio='$codiceSocio';
-               ";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
+    $sql = "UPDATE socio set eliminato='si' where codSocio='$codiceSocio'";
+    $stmt = $conn->query($sql);
     header("Location: SocioElimina.php", true, 301);
     exit();
 } catch (PDOException $e) {

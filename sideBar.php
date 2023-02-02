@@ -87,7 +87,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <h5 style="text-align: center;">Sezione tessera</h5>
                                         <a class="dropdown-item" href="./tessera/reporttessere.php">report tessera</a>
-
+                                        <a class="dropdown-item" href="./tessera/segnalazioneTessera.php">segnalazione Perdita Tessera</a>
                                         <a class="dropdown-item" href="./pagamento/gestionepagamenti.php">gestione pagamento
                                             tessera</a>
                                         <?php

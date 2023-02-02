@@ -1,11 +1,7 @@
 
 <?php
-
 include  "../conn.php";
-
 $figurante = $_POST['figurante'];
-
-
 $nome = $_POST['nome'];
 echo $nome;
 echo '<br>';
@@ -39,36 +35,36 @@ echo '<br>';
 $tipoTessera = $_POST['tipologiaTessera'];
 echo $tipoTessera;
 echo '<br>';
-
-$sql = "SELECT codSocio FROM socio order by codSocio desc LIMIT 1";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$totale = $stmt->rowCount();
-
-
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    explode("C", $row['codSocio']);
-    $row['codSocio']++;
-    $codiceSocio = $row['codSocio'];
-}
-$sql = "INSERT INTO socio values ('$codiceSocio','$nome','$cognome','$indirizzo','$citta','$provincia',
-'$cf','$cell','$dataIscrizione','$figurante','$staff','$carica');";
-$conn->query($sql);
-
-$sql = "SELECT codTessera from tessera order by codTessera desc limit 1";
-$stmt = $conn->prepare($sql);
+$tmp = 0;
+$sql = "SELECT codSocio FROM socio";
+$stmt = $conn->query($sql);
 $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    explode("S", $row['codTessera']);
-    $row['codTessera']++;
-    $codTessera = $row['codTessera'];
+    $codSocio = explode('SC', $row['codSocio'])[1];
+    if ($codSocio > $tmp) {
+        $tmp = $codSocio;
+    }
 }
-
-$sql = "INSERT INTO tessera values('$codTessera','$tipoTessera',DEFAULT);";
+$tmp++;
+$codSocio = 'SC' . $tmp;
+$sql = "INSERT INTO socio values ('$codSocio','$nome','$cognome','$indirizzo','$citta','$provincia',
+'$cf','$cell','$dataIscrizione','$figurante','$staff','$carica',DEFAULT);";
+$stmt = $conn->query($sql);
+$tmp = 0;
+$sql = "SELECT codTessera FROM tessera";
+$stmt = $conn->query($sql);
+$stmt->execute();
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $codTessera = explode('TS', $row['codTessera'])[1];
+    if ($codTessera > $tmp) {
+        $tmp = $codTessera;
+    }
+}
+$tmp++;
+$codTessera ='TS'.$tmp;
+$sql = "INSERT INTO tessera VALUES ('$codTessera','$tipoTessera',DEFAULT,'$codSocio',CURDATE());";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-$totale = $stmt->rowCount();
-$sql = "INSERT INTO socio_tessera VALUES ('$codiceSocio','$codTessera',CURDATE());";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
+header("Location: registraSocio.php");
+exit();
 ?>

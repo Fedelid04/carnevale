@@ -3,6 +3,11 @@ session_start();
 include '../conn.php';
 if (isset($_POST['usr']) && isset($_POST['pwd'])) { //controlla se l'utente ha fatto il login
     $_SESSION['usr'] = $_POST['usr'];
+    $sql = "SELECT * FROM tessera where codSocio='$_SESSION[usr]' and attiva='si'";
+    $stmt=$conn->query($sql);
+    while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+        $_SESSION['tessera']=$row['codTessera'];
+    }
     $_SESSION['pwd'] = $_POST['pwd'];
     try {
         $sql = "SELECT * from login where codSocio LIKE '" . $_SESSION['usr'] . "'

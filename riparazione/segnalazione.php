@@ -24,7 +24,7 @@
     ?>
     <div class="container" id="FormUpdate">
         <h1 style="text-align: center;">SEGNALAZIONE MASCHERA ROTTA</h1>
-        <form action="segnalazione.php" method="post" name="form" style="text-align:center">
+        <form action="updateRiparazione.php" method="post" name="form" style="text-align:center">
             <br>
             <div class="form-row">
                 <div class="form-group col-sm-4 offset-4">

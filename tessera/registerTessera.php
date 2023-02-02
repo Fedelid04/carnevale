@@ -1,46 +1,32 @@
 
 <?php
-
 include "../conn.php";
-$sql = "SELECT * FROM tessera order by codTessera desc limit 1";
-$stmt=$conn->query($sql);
-while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-    $row['codTessera']=explode("S",$row['codTessera']);
-    $row['codTessera']++;
-    $codTessera=$row['codTessera'];
+$tipo = $_POST['Tipo'];
+echo $tipo;
+$tmp = $_POST['numeroTessera'];
+
+$sql = "SELECT codTessera FROM tessera";
+$stmt = $conn->query($sql);
+$stmt->execute();
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $codTessera = explode('TS', $row['codTessera'])[1];
 }
-
-$sql = "INSERT INTO tessera values ('$codTessera','$tipo'
-         WHERE nTessera = '$numeroTessera'  LIMIT 1";
-
+$codTessera = 'TS'.$tmp;
+$sql = "SELECT * FROM tessera where codTessera='$codTessera'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $totale = $stmt->rowCount();
-
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo '<br>';
 }
-
 if ($totale == 1) {
-
     header("Location: aggiungiTessera.php?errore=1", true, 301);
     exit();
 } else {
-
-
-
-
-    $query = " INSERT INTO tessera (nTessera,tipo) VALUES('$numeroTessera','$tipo');
-           ";
-
-
-    if ($conn->query($query) == true) {
-
-        header("Location: aggiungiTessera.php?errore=0", true, 301);
-        exit();
-    } else {
-
-        echo "errore registrazione $query " . $conn->error;
-    }
+    $sql = "INSERT INTO tessera values ('$codTessera','$tipo',DEFAULT)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
 }
+header("Location: aggiungiTessera.php");
+exit();
 ?>

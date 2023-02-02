@@ -11,18 +11,18 @@
 </head>
 
 <body>
-<?php
-  include 'navbarSocio.php';
-  ?>
+    <?php
+    include 'navbarSocio.php';
+    ?>
     <div class="container" id="FormElimina">
-        <h1>Elimina Socio</h1>
         <form action="eliminaSocio.php" method="post">
-            <div class="form-group col-md-6 mx-auto">
+            <div class="form-group col-md-6 auto">
+                <h1>Elimina Socio</h1>
                 <label for="inputState">Codice Socio</label>
                 <select name="codiceSocio" class="form-control">
                     <?php
                     include "../conn.php";
-                    $sql = "SELECT * FROM socio";
+                    $sql = "SELECT * FROM socio where eliminato='no'";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

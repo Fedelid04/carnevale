@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,13 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="../css/navBar.css">
+  <link rel="stylesheet" href="../css/NAVBAR2.css">
 </head>
 
 <body>
-  <div class="container-fluid">
-    <a href="../home.php" class="btn btn-info" role="button">Home</a>
-  </div>
-  <div class='ricerca' style="text-align:center">
+  <?php
+  include 'navbarFigurante.php';
+  ?>
+  <div class='ricerca' style="text-align:center" id="FormUpdate">
     <h1>Seleziona figurante da modificare</h1>
     <span class='clienti'>lista figuranti</span>
     <input type='text' name='myInput' class='searchBar' id="myInput" onkeyup="myFunction()" placeholder="cerca clienti..">
@@ -34,7 +34,7 @@
         <?php
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo '<tr style=text-align:center>';
-            echo '<td><button><a class="modificaSocio" href="modificaFigurante.php?codSocio=' . $row['codSocio'] . '&&uscita=' . $row['uscita'] . '"> cod:' . $row['codSocio'] . ' uscita:' . $row['uscita'] . '</button></a>';
+            echo '<td><button><a class="modificaSocio" href="modificaFigurante.php?codSocio='.$row['codSocio'].'&&uscita='.$row['uscita'].'"> cod:' . $row['codSocio'] . ' uscita:' . $row['uscita'] . '</button></a>';
             echo '</td>';
             echo '</tr>';
           }
@@ -73,7 +73,7 @@
     }
   </script>
   <script src="//code.jquery.com/jquery.js"></script>
-  <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+  <script src="../bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
