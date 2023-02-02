@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,20 +22,28 @@
           <label for="">Seleziona la Maschera</label>
           <select name="codMaschera" class="form-control" style="color:inherit;">
             <?php
-            try {
-              include  "../conn.php";
-              $sql = "SELECT  * FROM maschera where eliminato = 'no'";
-              $stmt = $conn->prepare($sql);
-              $stmt->execute();
-              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo ' <option value=' . $row['codMaschera'] . ' style="color:'.$row['colore'].';">'.$row['codMaschera'].' '. $row['descrizione'] . '</option>';
+            if (isset($_GET['codMaschera'])) {
+              include '../conn.php';
+              $sql= "SELECT * FROM maschera where codMaschera = '".$_GET['codMaschera']."'";
+              $stmt = $conn->query($sql);
+              $row = $stmt->fetch(PDO::FETCH_ASSOC);
+              echo "<option value = $row[codMaschera]>$row[codMaschera] $row[descrizione] </option>";              
+            } else {
+              try {
+                include "../conn.php";
+                $sql = "SELECT  * FROM maschera where eliminato = 'no'";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                  echo ' <option value=' . $row['codMaschera'] . ' style="color:' . $row['colore'] . ';">' . $row['codMaschera'] . ' ' . $row['descrizione'] . '</option>';
+                }
+              } catch (PDOException $e) {
+                echo "Errore nella query....<br/>";
+                echo $e->getMessage() . "<br/>";
+                die();
+              } finally {
+                $conn = null;
               }
-            } catch (PDOException $e) {
-              echo "Errore nella query....<br/>";
-              echo $e->getMessage() . "<br/>";
-              die();
-            } finally {
-              $conn = null;
             }
             ?>
           </select>

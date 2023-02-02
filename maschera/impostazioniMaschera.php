@@ -28,15 +28,17 @@
         <?php
         include "../conn.php";
         try {
-          $sql = "SELECT * FROM maschera";
+          $sql = "SELECT * FROM maschera where eliminato = 'no'";
           $stmt = $conn->prepare($sql);
           $stmt->execute();
         ?>
         <?php
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo '<tr style=text-align:center>';
-            echo '<td><button><a class="modificaSocio" href="modificaMaschera.php?nMaschera=' . $row['nMaschera'] . '">numero maschera: ' . $row['nMaschera'] . '</a>';
-            echo '<a class="eliminaSocio" href="MascheraElimina.php?nMaschera=' . $row['nMaschera'] . '"> x </a></button>';
+            echo '<td><button>
+            <a class="modificaSocio" href="modificaMaschera.php?codMaschera=' . $row['codMaschera'] . '">numero maschera: ' . $row['codMaschera'].' '.$row['descrizione'].'</a>';
+            echo '<a class="eliminaSocio" href="MascheraElimina.php?codMaschera=' . $row['codMaschera'] . '"> x </a>
+            </button>';
             echo '</tr>';
           }
         } catch (PDOException $e) {

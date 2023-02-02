@@ -21,19 +21,19 @@
     <h3 style="text-align: center;">AGGIUNGI MASCHERA</h3>
     <form action="registerMaschera.php" method="post" enctype="multipart/form-data" id="form" ">
       <div class="form-row">
-        <div class="form-group col-sm-3 offset-2">
+        <div class="form-group col-md-3 mx-auto">
           <label class="container text-center" for="descrizione">descrizione:</label><br>
           <textArea id="descrizione" class="form-control" placeholder="descrizione" name="descrizione" maxlength="150"
             required rows="1">
           </textArea>
         </div>
-        <div class="form-group col-md-2 offset-2">
+        <div class="form-group col-md-1 mx-auto">
           <label class="container text-center" for="colore">colore:</label><br>
           <input id="colore" class="form-control" name="colore" type="color">
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-3 offset-2">
+        <div class="form-group col-md-3 mx-auto">
           <label class="container text-center" for="deposito"> deposito:</label>
           <select class="form-control" id="deposito" name="deposito">
             <?php
@@ -57,7 +57,7 @@
             ?>
           </select>
         </div>
-        <div class="form-group col-md-3 offset-2">
+        <div class="form-group col-md-3 mx-auto">
           <label class="container text-center" for="sarta">sarta:</label>
           <select id="sarta" name="sarta" class="form-control">
             <?php
@@ -81,16 +81,16 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-8 offset-2">
+        <div class="form-group col-md-8 mx-auto">
           <label class="container text-center">scegli immagine</label>
           <input class="form-control" type="file" name="my_image">
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-sm-2 offset-3">
+        <div class="form-group col-sm-2 mx-auto">
           <input class="form-control" type="reset" name="cancella" value="Annulla">
         </div>
-        <div class="form-group col-sm-2 offset-2">
+        <div class="form-group col-sm-2 mx-auto">
           <input type="submit" value="registra" class="form-control" id="registrazione">
         </div>
       </div>

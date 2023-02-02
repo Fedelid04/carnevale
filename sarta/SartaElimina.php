@@ -21,16 +21,15 @@
       <div class="form-row">
         <div class="form-group col-sm-6 mx-auto" style="text-align: center;">
           <label for="codiceSarta"> codice sarta:</label>
-          <select class="form-control" id="codiceSarta" name="codiceSarta" required>
-            <option value=''> </option>
+          <select class="form-control" id="codiceSarta" name="codSarta" required>            
             <?php
             try {
               include  "../conn.php";
-              $sql = "SELECT * FROM sarta";
+              $sql = "SELECT * FROM sarta where eliminato = 'no'";
               $stmt = $conn->prepare($sql);
               $stmt->execute();
               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo ' <option value=' . $row['codiceSarta'] . '>' . $row['codiceSarta'] . ' </option>';
+                echo ' <option value='.$row['codSarta'].'>'.$row['codSarta'].' '.$row['nome'].' '.$row['cognome'].' </option>';
               }
             } catch (PDOException $e) {
               echo "Errore nella query....<br/>";

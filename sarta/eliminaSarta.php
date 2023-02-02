@@ -1,40 +1,17 @@
-
 <?php
 
-$codiceSarta= $_POST['codiceSarta'];
-echo $codiceSarta;
+$codSarta = $_POST['codSarta'];
 
 try {
     include "../conn.php";
 
-    $sql = "    DELETE FROM sarta WHERE codiceSarta='$codiceSarta';
-   
-    ";
-    
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-    
-        $sql = "    SELECT * FROM riparazione WHERE codiceSarta='$codiceSarta';
-   
-        ";
+    $sql = "UPDATE sarta SET eliminato =  'si' WHERE codSarta='$codSarta';";
 
- $stmt = $conn->prepare($sql);
-$stmt->execute();
-
-$totale= $stmt->rowCount();
-  
-if ($totale!=0) {
- 
-    $sql = " UPDATE maschera SET codiceSarta=NULL WHERE  codiceSarta='$codiceSarta';";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
 
 
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-
-}
-        header("Location: SartaElimina.php", true, 301);
-         exit();
-
+    header("Location: SartaElimina.php");
 
 } catch (PDOException $e) {
     echo "Errore nella query....<br/>";
