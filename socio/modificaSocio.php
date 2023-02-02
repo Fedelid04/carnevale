@@ -15,7 +15,24 @@
     include 'navbarSocio.php';
     ?>
     <?php
+    include "../conn.php";
     $codSocio = $_POST['codiceSocio'];
+    $sql = "SELECT * FROM socio where codSocio='$codSocio'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $nome = $row['nome'];
+        $cognome = $row['cognome'];
+        $cf = $row['cf'];
+        $telefono = $row['cell'];
+        $staff = $row['staff'];
+        $figurante = $row['figurante'];
+        $citta = $row['citta'];
+        $provincia = $row['provincia'];
+        $indirizzo = $row['via'];
+        $dataIscrizione = $row['dataIscrizione'];
+        $codCarica = $row['codCarica'];
+    }
     ?>
     <div class="container" id="FormUpdate">
         <h3 style="text-align: center;">Modifica Socio</h3>
@@ -23,30 +40,30 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="">Nome</label>
-                    <input name="nome" type="text" class="form-control" placeholder="Nome">
+                    <input name="nome" type="text" class="form-control" placeholder=<?php echo $nome?>>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="">Cognome</label>
-                    <input name="cognome" type="text" class="form-control" placeholder="Cognome">
+                    <input name="cognome" type="text" class="form-control" placeholder=<?php echo $cognome ?>>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="">CF</label>
-                    <input name="cf" type="text" class="form-control" placeholder="Codice Fiscale">
+                    <input name="cf" type="text" class="form-control" placeholder=<?php echo $cf ?>>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="">Telefono</label>
-                    <input name="cell" type="number" class="form-control" placeholder="Telefono">
+                    <input name="cell" type="number" class="form-control" placeholder=<?php echo $telefono ?>>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="staff">staff:</label>
-                    <select class="form-control" id="staff" name="staff" required>
+                    <select class="form-control" id="staff" name="staff" required placeholder=<?php echo $staff ?>>
                         <option value="no">no</option>
                         <option value="si">si</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="figurante">figurante:</label>
-                    <select class="form-control" id="figurante" name="figurante" required onchange=mask()>
+                    <select class="form-control" id="figurante" name="figurante" required=<?php echo $figurante ?> required onchange=mask()>
                         <option value="no">no</option>
                         <option value="si">si</option>
                     </select>
@@ -55,15 +72,15 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="">Città</label>
-                    <input name="citta" type="text" class="form-control" placeholder="Arezzo">
+                    <input name="citta" type="text" class="form-control" placeholder=<?php echo $citta ?>>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="">Indirizzo</label>
-                    <input name="indirizzo" type="text" class="form-control" placeholder="Indirizzo">
+                    <input name="indirizzo" type="text" class="form-control" placeholder=<?php echo $indirizzo ?>>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="">Provincia</label>
-                    <input name="provincia" type="text" class="form-control" placeholder="Arezzo">
+                    <input name="provincia" type="text" class="form-control" placeholder=<?php echo $provincia ?>>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="dataIscrizione">data iscrizione:</label>
@@ -74,40 +91,19 @@
                     $date = date('Y-m-d', time());
 
                     echo '<input type="date" id="dataIscrizione" name="dataIscrizione" placeholder="data di iscrizione"
-                    min="1920-01-01" max=' . $date . '  class=form-control>';
+                    min="1920-01-01" max=' . $date . '  class=form-control placeholder=' . $dataIscrizione . '>';
                     ?>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="dataEvento">Data evento:</label>
-                    <select id="dataEvento" name="dataEvento" class="form-control">
-                        <option value='nessuna'>nessuna</option>
-                        <?php
-                        try {
-                            include "../conn.php";
-                            $sql = "SELECT * FROM evento";
-                            $stmt = $conn->prepare($sql);
-                            $stmt->execute();
-                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo ' <option value=' . $row['codEvento'] . '>' . $row['dataEvento'] . ' nome: ' . $row['descrizione'] . '</option>';
-                            }
-                        } catch (PDOException $e) {
-                            echo "Errore nella query....<br/>";
-                            echo $e->getMessage() . "<br/>";
-                            die();
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
                     <label for="inputState">Carica</label>
-                    <select name="carica" id="inputState" class="form-control">
+                    <select name="carica" id="inputState" class="form-control" placeholder=<?php echo $codCarica ?>>
                         <?php
                         include "../conn.php";
                         $sql = "SELECT * FROM carica";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<option>" . $row['tipoCarica'] . "</option>";
+                            echo "<option value=$row[codCarica]>" . $row['tipoCarica'] . "</option>";
                         }
                         ?>
                     </select>
@@ -123,7 +119,7 @@
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<option>" . $row['nMaschera'] . "</option>";
+                            echo "<option>" . $row['codMaschera'] . "</option>";
                         }
                         ?>
                     </select>

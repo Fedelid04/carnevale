@@ -70,9 +70,6 @@ a {
   display: block;
 }
 
-a:hover {
-  color: white;
-}
 
 li a:hover:not(.active) {
   color: #554e38;

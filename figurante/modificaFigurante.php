@@ -8,18 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="../css/navBar.css">
+  <link rel="stylesheet" href="../css/NAVBAR2.css">
 </head>
 
 <body>
-  <div class="container-fluid">
-    <a href="../home.php" class="btn btn-info" role="button">Home</a>
-  </div>
+  <?php
+  include 'navbarFigurante.php';
+  ?>
   <?php
   $codSocio = $_GET['codSocio'];
   ?>
   <div class="container" id="FormUpdate">
     <h1 style="text-align: center;">Modifica Figurante</h1>
-    <form action="cambioFigurante.php?codSocio=<?= $codSocio ?>" method="post">
+    <form action="cambioFigurante.php?codSocio=<?=$codSocio?>" method="post">
       <div class="form-row">
         <?php
         $codSocio = $_GET['codSocio'];
@@ -73,7 +74,7 @@
     </form>
   </div>
   <script src="//code.jquery.com/jquery.js"></script>
-  <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+  <script src="../bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

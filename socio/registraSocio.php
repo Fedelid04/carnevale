@@ -16,7 +16,7 @@
   include 'navbarSocio.php';
   ?>
   <div class="container" id="FormRegistra">
-    <h3 style="text-align: center;">REGISTRAZIONE</h3>
+    <h1 style="text-align: center;">REGISTRAZIONE</h1>
     <form action="register.php" method="post" name="form" id="form" class="">
       <div class="form-row">
         <div class="form-group col-sm-2">

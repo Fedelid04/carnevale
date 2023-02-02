@@ -15,8 +15,8 @@
   <div class="container text-center" id="FormUpdate">
     <form action="modificaSocio.php" method="post">
       <div class="form-row">
-        <div class="form-group col-sm-6 offset-2">
-          <h3>Modifica Socio</h3>
+        <div class="form-group col-sm-6 auto">
+          <h1>Modifica Socio</h1>
           <label for="inputState">CodiceSocio</label>
           <select name="codiceSocio" class="form-control">
             <?php

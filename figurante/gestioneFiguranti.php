@@ -8,15 +8,24 @@
     <link href="../bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/navBar.css">
+    <link rel="stylesheet" href="../css/NAVBAR2.css">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <a href="../home.php" class="btn btn-info" role="button">Home</a>
-    </div>
-    <div class="container">
-        <h3 style="text-align: center;">AGGIUNGI FIGURANTE</h3>
-        <form action="registerFigurante1.php" method="post" name="form" id="form" class="">
+    <?php
+    include 'navbarFigurante.php';
+    ?>
+    <div class="container" id="FormRegistra">
+        <?php
+        if (isset($_GET['errore'])) {
+            $errore = $_GET['errore'];
+            if ($errore == 1) {
+                echo '<script>alert("Figurante già registrato")</script>';
+            }
+        }
+        ?>
+        <h1 style="text-align: center;">AGGIUNGI FIGURANTE</h1>
+        <form action="registerFigurante.php" method="post" name="form" id="form" class="">
             <div class="form-row">
                 <div class="form-group col-sm-2">
                     <label for="codSocio">codice socio:</label>
@@ -24,11 +33,11 @@
                         <?php
                         try {
                             include "../conn.php";
-                            $sql = "SELECT codSocio FROM socio where figurante='no'";
+                            $sql = "SELECT codSocio FROM socio where figurante='si' and eliminato='no'";
                             $stmt = $conn->prepare($sql);
                             $stmt->execute();
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo ' <option value='.$row['codSocio'].'>'.$row['codSocio'].'</option>';
+                                echo ' <option value=' . $row['codSocio'] . '>' . $row['codSocio'] . '</option>';
                             }
                         } catch (PDOException $e) {
                             echo "Errore nella query....<br/>";
@@ -50,7 +59,7 @@
                         $sql = "SELECT * from maschera;";
                         $stmt = $conn->query($sql);
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo '<option value="'.$row['codMaschera'].'">'.$row['codMaschera'] .'</option>';
+                            echo '<option value="' . $row['codMaschera'] . '">' . $row['codMaschera'] . '</option>';
                         }
                         ?>
                     </select>
@@ -92,20 +101,9 @@
                     <input type="submit" value="registra" class="form-control" id="registrazione">
                 </div>
                 <div class="container-fluid" style="text-align:center">
-                    <?php
-                    if (isset($_GET['errore'])) {
-                        $errore = $_GET['errore'];
-
-                        if ($errore == 1) {
-                            echo "<br><div class='errore'>figurante già registrato </div><br>";
-                        } elseif ($errore == 2) {
-                            echo "<br><div class='errore'>maschera di recupero occupata </div><br>";
-                        }
-                    }
-                    ?>
                 </div>
                 <script src="//code.jquery.com/jquery.js"></script>
-                <script src="./bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+                <script src="../bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 
 </body>
 
