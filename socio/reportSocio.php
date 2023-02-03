@@ -39,11 +39,11 @@
 
 
 
-            <!-- Scrittura procedurale clienti da database -->
-            <div class='listaClienti'>
-                <ul id='clientiElenco'>
-                    <?php
-                    include "../conn.php";
+             <!-- Scrittura procedurale clienti da database -->
+             <div class='listaClienti'>
+                 <ul id='clientiElenco'>
+                     <?php
+                        include "../conn.php";
 
                     $sql = "SELECT * FROM socio where eliminato not like 'si'";
                     $stmt = $conn->prepare($sql);
@@ -69,8 +69,7 @@
         </section>
 
         <?php
-
-
+                     
         try {
             include "../conn.php";
 

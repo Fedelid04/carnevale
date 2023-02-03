@@ -6,7 +6,7 @@ $codiceSocio=$_POST['codiceSocio'];
 echo $codiceSocio;
 $numeroTessera=$_POST['numeroTessera'];
 echo $numeroTessera;
-$annoP=$_POST['annnoP'];
+$annoP=$_POST['annoP'];
 echo $annoP;
 $quota=$_POST['quota'];
 echo $quota;
@@ -26,7 +26,7 @@ if ($totale == 0) {
    header("Location: gestionePagamenti.php?errore=4", true, 301);
    exit();
 }else{
-$sql = "SELECT * FROM pagamentotessera
+$sql = "SELECT * FROM pagamento_tessera
 WHERE numeroTessera = '$numeroTessera' AND annoPagato='$annoP' LIMIT 1";
 
 $stmt = $con->prepare($sql);
@@ -40,23 +40,6 @@ if ($totale == 1) {
    header("Location: gestionePagamenti.php?errore=1", true, 301);
    exit();
 }else{
-
-    
-$sql = "SELECT * FROM pagamentotessera
-WHERE numeroRicevuta = '$numeroRicevuta' AND annoPagato='$annoP' LIMIT 1";
-
-$stmt = $con->prepare($sql);
-$stmt->execute();
-$totale = $stmt->rowCount();
-
-
-
-if ($totale == 1) {
-  
-   header("Location: gestionePagamenti.php?errore=5", true, 301);
-   exit();
-}else{
-
     $sql = "SELECT dataIscrizione FROM socio
     WHERE numeroTessera = '$numeroTessera';";
     
@@ -90,11 +73,11 @@ if ($totale == 1) {
         }
     echo $ultimoAnno;
         if ($ultimoAnno<$annoP) {
-            $query = " INSERT INTO pagamentotessera VALUES($quota,'$codiceSocio','$numeroTessera','$annoP','$numeroRicevuta');
+            $query = " INSERT INTO pagamento_tessera VALUES($quota,'$codiceSocio','$numeroTessera','$annoP','$numeroRicevuta');
             UPDATE socio SET anniPagati='$annoP' WHERE  codiceSocio='$codiceSocio';
     ";
         }else{
-            $query = " INSERT INTO pagamentotessera VALUES($quota,'$codiceSocio','$numeroTessera','$annoP','$numeroRicevuta');
+            $query = " INSERT INTO pagamento_tessera VALUES($quota,'$codiceSocio','$numeroTessera','$annoP','$numeroRicevuta');
     ";
         }
     
