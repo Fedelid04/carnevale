@@ -16,19 +16,19 @@ function creaTabella($sql, $stmt, $vetIndex)
     echo "</table>";
 }
 
-function creaTabella2($sql, $stmt, $vetIndex)
+function creaTabella2($tabella , $codSocio)
 {
-    $sql = explode("FROM", $sql)[0];
-    $sql = removeSpaces($sql);
-    $vetCampi = getCampi($sql);
-
+    $sql = "SELECT COLUMN_NAME 
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = N'" . $tabella . "' AND TABLE_SCHEMA LIKE 'carnevaleFibocchi'";        
     // print_r($vetCampi);
     echo '<table border = "1" id="table">';
     
-    echo getHeader2($vetCampi, $vetIndex);
+    echo getHeader2($sql);
    
     echo '<tbody id="myTable">';
-    printTable($stmt, $vetCampi, $vetIndex);
+    $sql = "select socio.*, figurante.codMaschera as codMaschera , figurante.mascheraRiserva as mascheraRiserva from socio left join figurante ON socio.codSocio = figurante.codSocio where socio.codSocio like '$codSocio'";    
+    echo printTable($sql , $tabella);
     echo '</tbody>';
     echo "</table>";
 }
@@ -42,7 +42,7 @@ function getCampi($sql)
     for ($i = 0; $i < count($vetData); $i++) {
         # code...
         # predno solo il campo e non la tabella di provenienza
-        $vetCampi[$i] = explode(".", $vetData[$i])[1];
+        $vetCampi[$i] = explode(".", $vetData[$i])[1]; 
     }
     return $vetCampi;
 }
@@ -89,61 +89,39 @@ function getHeader($vetCampi, $vetIndex)
     return $string;
 }
 
-function getHeader2($vetCampi, $vetIndex)
+function getHeader2($sql)
 {
-   
-    $string = "<tr>";
-
-    for ($i = 0; $i < count($vetCampi); $i++) {
-        # code...
-        for ($j = 0; $j < count($vetIndex); $j++) {
-            # code...
-            if ($i == $vetIndex[$j]) {
-                # code...
-                $string .= "<td>";
-              
-                $string .= $vetCampi[$i];
-                $string .= "</td>";
-            }
-        }
+    include 'conn.php';
+    $stmt = $conn->query($sql);
+    $string = "<tr>";        
+    foreach($stmt as $row){
+        $string .="<th>".$row['COLUMN_NAME']."</th>";        
     }
-
-    $string .= "</tr>";
+    $string .= "<th>Maschera Principale</th><th>Maschera Riserva</th></tr>";    
     
     return $string;
 }
 
-function printTable($stmt, $vetCampi, $vetIndex)
+function printTable($sql , $tabella)
 {
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr>";
-        for ($i = 0; $i < count($vetCampi); $i++) {
-            # code...
-            for ($j = 0; $j < count($vetIndex); $j++) {
-                # code...
-                if ($i == $vetIndex[$j]) {
-                    # code...
-                    if ($row[$vetCampi[$i]] == NULL) {
-                        # code...
-                        echo "<td style='background: indianred;'>";
-                        echo "N/A";
-                        echo "</td>";
-                    }elseif ($row[$vetCampi[$i]] == "si") {
-                        echo "<td style='background: lightgreen;'>";
-                        echo $row[$vetCampi[$i]];
-                        echo "</td>";
-                    }elseif ($row[$vetCampi[$i]] == "no") {
-                        echo "<td style='background: indianred;'>";
-                        echo $row[$vetCampi[$i]];
-                        echo "</td>";
-                    } else {
-                        echo "<td>";
-                        echo $row[$vetCampi[$i]];
-                        echo "</td>";
-                    }
-                }
-            }
-        }
-        echo "</tr>";
+    include 'conn.php';
+    $stmt = $conn->query($sql);    
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $query = "SELECT COLUMN_NAME 
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = N'" . $tabella . "' AND TABLE_SCHEMA LIKE 'carnevaleFibocchi'";        
+    $ar = array();
+    $stmt = $conn->query($query);
+    $i = 0;
+    foreach($stmt as $riga){
+        $ar[$i] = $riga['COLUMN_NAME'];        
+        $i++;
     }
+    array_push($ar, "codMaschera", "mascheraRiserva");
+        
+    $string = "";    
+    for ($i = 0; $i < sizeof($row);$i++){        
+        $string .= "<td>".$row[$ar[$i]]."</td>";        
+    }
+    return $string;
 }
