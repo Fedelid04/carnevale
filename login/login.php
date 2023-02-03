@@ -20,7 +20,7 @@ if (isset($_POST['usr']) && isset($_POST['pwd'])) { //controlla se l'utente ha f
             $usr = $row['codSocio'];
             $pwd = $row['psw'];
         }
-        $sql = "SELECT * FROM carica join socio using (codCarica) where socio.codSocio like '$_POST[usr]'"; //query per ottenere il ruolo dell'utente
+        $sql = "SELECT * FROM carica join socio using (codCarica) where socio.email like '$_POST[usr]'"; //query per ottenere il ruolo dell'utente
         $stmt = $conn->query($sql);
         foreach ($stmt as $row) {
             $_SESSION['tipoCarica'] = $row['codCarica'];

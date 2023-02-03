@@ -97,7 +97,7 @@ $psw=$_POST['psw'];
 $sql = "INSERT INTO socio values ('$codSocio','$nome','$cognome','$indirizzo','$citta','$provincia',
 '$cf','$cell','$dataIscrizione','$figurante','$staff','$carica',DEFAULT,'$email','$numCivico');";
 $stmt = $conn->query($sql);
-$sql = "INSERT INTO login values ('$codSocio','".hash('sha256',$psw)."')";
+$sql = "INSERT INTO login values ('$email','".hash('sha256',$psw)."')";
 $stmt = $conn->query($sql);
 if ($figurante == 'si') {
     $sql = "INSERT INTO maschera values
