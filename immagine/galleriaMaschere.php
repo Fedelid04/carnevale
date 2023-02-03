@@ -29,9 +29,9 @@
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     echo '<br>';
                     echo '<div class="col-sm-4 project">
-                            <img onclick=on("../uploads/'.$row['immagine'] .'") class="project__image" id="image" src="../uploads/' . $row['immagine'] . '" />
+                            <img onclick=on("../uploads/'.$row['percorso'] .'") class="project__image" id="image" src="../uploads/' . $row['percorso'] . '" />
                             <div id="col-sm-4" >
-                            numero maschera: ' . $row['nMaschera'] . '
+                            numero maschera: ' . $row['codFoto'] . '
                             </div>
                             </div>
                             ';
