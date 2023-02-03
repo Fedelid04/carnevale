@@ -15,11 +15,11 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <style>
-        th{
+        th {
             padding: 10px;
-            border: solid 1px black;            
+            border: solid 1px black;
         }
-    </style>        
+    </style>
     <title>report Socio</title>
 </head>
 
@@ -39,11 +39,11 @@
 
 
 
-             <!-- Scrittura procedurale clienti da database -->
-             <div class='listaClienti'>
-                 <ul id='clientiElenco'>
-                     <?php
-                        include "../conn.php";
+            <!-- Scrittura procedurale clienti da database -->
+            <div class='listaClienti'>
+                <ul id='clientiElenco'>
+                    <?php
+                    include "../conn.php";
 
                     $sql = "SELECT * FROM socio where eliminato not like 'si'";
                     $stmt = $conn->prepare($sql);
@@ -68,60 +68,6 @@
 
         </section>
 
-        <?php
-                     
-        try {
-            include "../conn.php";
-
-            if (isset($_GET['codSocio'])) {
-
-                $codSocio = $_GET['codSocio'];
-
-                $sql = "SELECT socio.nome , socio.cognome , carica.tipoCarica,
-        (SELECT codMaschera  FROM figurante where figurante.codSocio like '$_GET[codSocio]') AS codMaschera , 
-        (SELECT mascheraRiserva  FROM figurante where figurante.codSocio like '$_GET[codSocio]') AS mascheraRiserva , pagamento_tessera.anno,
-        socio.staff , socio.figurante
-        FROM (((socio JOIN carica USING (codCarica)) JOIN figurante USING (codSocio) )
-         JOIN tessera USING(codSocio) ) JOIN pagamento_tessera USING(codTessera) 
-        WHERE codSocio LIKE '$_GET[codSocio]' and socio.figurante = 'si' and socio.eliminato not like 'si'";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                if (!isset($row)) {
-                    $sql = "SELECT socio.nome, socio.cognome, car";
-                }
-
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $tipoCarica = $row['tipoCarica'];
-                    $codMaschera = $row['codMaschera'];
-                    $anno = $row['anno'];
-                    $staff = $row['staff'];
-                    $figurante = $row['figurante'];
-                }
-
-                $totale = $stmt->rowCount();
-                if ($totale == 0) {
-                    echo "<div class='contatto'> nessuna attività con" . $codSocio . " </div>";
-
-                }
-
-
-
-            }
-        } catch (PDOException $e) {
-            echo "Errore nella query....<br/>";
-            echo $e->getMessage() . "<br/>";
-            die();
-        } finally {
-            $conn = null;
-        }
-
-
-        ?>
-
-
-
 
 
         <section class='tabelleLog'>
@@ -137,25 +83,29 @@
 
                         $codSocio = $_GET['codSocio'];
                         $sql = "SELECT * 
-                    FROM (((socio join carica using (codCarica)) join figurante using (codSocio))
-                    join tessera using(codSocio))join pagamento_tessera using(codTessera)
-                    WHERE socio.codSocio = '$codSocio';";
-
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute();
-
-
-                        $totale = $stmt->rowCount();
-                        if ($totale == 0) {
-                            echo "<div class='contatto'> nessuna attività con" . $codSocio . " </div>";
-
+                        FROM (((socio join carica using (codCarica)) join figurante using (codSocio))
+                        join tessera using(codSocio)) join pagamento_tessera using(codTessera)
+                        WHERE socio.codSocio like '$codSocio' and socio.figurante like 'si';";
+                        echo $sql;
+                        $stmt = $conn->query($sql);
+                        print_r($stmt->fetchAll());
+                        if(empty($stmt->fetchAll())){
+                            $sql = "SELECT * 
+                            FROM (((socio join carica using (codCarica)) join figurante using (codSocio))
+                            join tessera using(codSocio))join pagamento_tessera using(codTessera)
+                            WHERE socio.codSocio = '$codSocio';";
+                            $stmt->query($sql);
+                            echo '<table border="1" id="table"><thead>
+                            <tr><th>COD Socio</th><th>Nome</th><th>Cognome</th><th>Via</th>
+                            <th>Civico</th><th>Citta</th><th>Provincia</th><th>CF</th>
+                            <th>Cell</th><th>Data Iscrizione</th><th>Figurante</th><th>Staff</th></tr></thead><tbody>';
                         } else {
-                            $codSocio = $_GET['codSocio'];                            
+                            $codSocio = $_GET['codSocio'];
                             $stmt = $conn->prepare($sql);
                             $stmt->execute();
-                            $nome = $_GET['nome'];                            
+                            $nome = $_GET['nome'];
                             $cognome = $_GET['cognome'];
-                            foreach($stmt as $row){
+                            foreach ($stmt as $row) {
                                 $figurante = $row['figurante'];
                                 $staff = $row['staff'];
                                 $tipoCarica = $row['tipoCarica'];
@@ -193,88 +143,88 @@
                             echo "</div>";
 
 
-
-                            $sql = "SELECT tessera.codSocio, tessera.idTipo, tessera.codTessera
+                        }
+                        $sql = "SELECT tessera.codSocio, tessera.idTipo, tessera.codTessera
                     FROM tessera
                     WHERE tessera.codSocio = '$codSocio';";
 
-                            $stmt = $conn->prepare($sql);
-                            $stmt->execute();
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
 
-                            $totale = $stmt->rowCount();
+                        $totale = $stmt->rowCount();
 
-                            if ($totale == 0) {
-                                echo "<div class='contatto'> nessuna tessera" . $codSocio . " </div>";
-                            } else {
-
-
-                                echo '<div class="spostamentoReport">';
-                                echo "<div class='nomeT'> informazioni tessera </div>";
-                                echo "<div class='reportListTessera'>";
-
-                                creaTabella($sql, $stmt, [0, 1, 2, 3]);
-
-                                echo "</div>";
-                                echo "</div>";
-
-                            }
+                        if ($totale == 0) {
+                            echo "<div class='contatto'> nessuna tessera" . $codSocio . " </div>";
+                        } else {
 
 
+                            echo '<div class="spostamentoReport">';
+                            echo "<div class='nomeT'> informazioni tessera </div>";
+                            echo "<div class='reportListTessera'>";
+
+                            creaTabella($sql, $stmt, [0, 1, 2, 3]);
+
+                            echo "</div>";
+                            echo "</div>";
 
                         }
 
-                    } else {
-                        include '../conn.php';
-                        $sql = "SELECT socio.codSocio , socio.nome , socio.cognome , socio.cell, socio.email , socio.dataIscrizione
+
+
+                    }
+
+                    include '../conn.php';
+                    $sql = "SELECT socio.codSocio , socio.nome , socio.cognome , socio.cell, socio.email , socio.dataIscrizione
                         FROM socio where eliminato not like 'si'";
-                        
-                        $totale = $stmt->rowCount();
-                        if ($totale == 0) {
-                            echo "<div class='nomeSocieta' style='width:600px'> nessuna attività con i dati richiesti  </div>";
 
-                        } else {
-                            $stmt = $conn->query($sql);                            
-                
+                    $totale = $stmt->rowCount();
+                    if ($totale == 0) {
+                        echo "<div class='nomeSocieta' style='width:600px'> nessuna attività con i dati richiesti  </div>";
 
-                            echo '<div class="spostamentoReport">';
-                            echo "<div class='reportList'>
-                    ";      
-                            echo "<table style='border: 1px solid black;'><thead>
+                    } else {
+                        $stmt = $conn->query($sql);
+
+
+                        echo '<div class="spostamentoReport">';
+                        echo "<div class='reportList'>
+                    ";
+                        echo "<table style='border: 1px solid black;'><thead>
                             <th>COD Socio</th><th>Nome</th><th>Cognome</th><th>Cell</th><th>Email</th><th>Data Iscrizione</th></thead><tbody>";
-                            foreach($stmt as $row){
-                                echo "<tr>";                                
-                                echo "<td>". $row['codSocio']. "</td>";
-                                echo "<td>". $row['nome']. "</td>";
-                                echo "<td>". $row['cognome']. "</td>";
-                                echo "<td>". $row['cell']. "</td>";
-                                echo "<td>". $row['email']. "</td>";
-                                echo "<td>".$row['dataIscrizione']."</td>";
-                                echo "</tr>";
+                        foreach ($stmt as $row) {
+                            echo "<tr>";
+                            echo "<td>" . $row['codSocio'] . "</td>";
+                            echo "<td>" . $row['nome'] . "</td>";
+                            echo "<td>" . $row['cognome'] . "</td>";
+                            echo "<td>" . $row['cell'] . "</td>";
+                            echo "<td>" . $row['email'] . "</td>";
+                            echo "<td>" . $row['dataIscrizione'] . "</td>";
+                            echo "</tr>";
 
-                            }   
-                            echo "</tbody></table>";                                                            
-                            echo "</div>";
-                            echo "</div>";
-
-
+                        }
+                        echo "</tbody></table>";
+                        echo "</div>";
+                        echo "</div>";
 
 
 
 
 
-                            echo "<div style='transform: translateY(610px)'>";
-                            echo "<div class='nomeSocieta' style='background: darkgreen;
+
+
+                        echo "<div style='transform: translateY(610px)'>";
+                        echo "<div class='nomeSocieta' style='background: darkgreen;
                     width: 200px;
                     position: relative;
                     left: 70%;
                     bottom: 10px;'>";
-                            echo "<a href='download.php?scelta=1'>scarica file .xls <i class='bx bx-download'></i></a>";
-                            echo "</div>";
-                            echo "</div>";
+                        echo "<a href='download.php?scelta=1'>scarica file .xls <i class='bx bx-download'></i></a>";
+                        echo "</div>";
+                        echo "</div>";
 
 
-                        }
                     }
+
+
                 } catch (PDOException $e) {
                     echo "Errore nella query....<br/>";
                     echo $e->getMessage() . "<br/>";
