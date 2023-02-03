@@ -115,6 +115,5 @@ if ($figurante == 'si') {
 $sql = "INSERT INTO tessera VALUES ('$codTessera','$tipoTessera',DEFAULT,'$codSocio',CURDATE());";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-echo "<br>";
-echo hash('sha256',$psw);
+header("Location: ../home.php");
 ?>
