@@ -262,3 +262,10 @@ body {
     margin-bottom: 100px;
   }
 }
+#listacl{
+  font-size: 20px;
+  padding: 20px 20px 20px 20px;
+}
+#FormPagamento{
+  margin-left: 400px;
+}

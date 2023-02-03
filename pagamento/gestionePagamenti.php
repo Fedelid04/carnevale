@@ -40,17 +40,17 @@
                     <?php
                     include  "../conn.php";
 
-                    $sql = "SELECT * FROM socio";
+                    $sql = "SELECT * FROM socio join tessera using(codSocio)";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
 
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<li><ion-icon name='arrow-forward-outline'></ion-icon><a id='socio: " . $row['codSocio'] . " tessera: " . $row['nTessera'] . "' class='opzione cliente " . $row['codSocio'] . "' href='gestionePagamenti.php?";
+                        echo "<li><ion-icon name='arrow-forward-outline'></ion-icon><a id='socio: " . $row['codSocio'] . " tessera: " . $row['codTessera'] . "' class='opzione cliente " . $row['codSocio'] . "' href='gestionePagamenti.php?";
                         echo "codSocio=";
                         echo $row['codSocio'];
-                        echo "&&nTessera=" . $row['nTessera'] . "'>";
-                        echo 'socio:' . $row['codSocio'] . ' tessera:' . $row['nTessera'];
+                        echo "&&nTessera=" . $row['codTessera'] . "'>";
+                        echo 'socio:' . $row['codSocio'] . ' tessera:' . $row['codTessera'];
                         /*      if($row['attivita']=="no"){
                         echo ' stato:';
                        
@@ -79,7 +79,7 @@
 
 
 
-            <a class='logout' href="home.php" style="width: 360px;"><button class='bottone'>HOME</button></a>
+            <a class='logout' href="../home.php" style="width: 360px;"><button class='bottone'>HOME</button></a>
 
 
 
@@ -209,7 +209,7 @@
    <option value=""> </option>';
 
                     try {
-                        include  "conn.php";
+                        include  "../conn.php";
 
 
                         $sql = "SELECT * from socio";
@@ -243,13 +243,13 @@
 
 
 
-                        $sql = "SELECT nTessera from socio;";
+                        $sql = "SELECT codTessera from tessera;";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
 
 
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo ' <option value=' . $row['nTessera'] . '>' . $row['nTessera'] . '</option>';
+                            echo ' <option value=' . $row['codTessera'] . '>' . $row['codTessera'] . '</option>';
                         }
                     } catch (PDOException $e) {
                         echo "Errore nella query....<br/>";
@@ -325,13 +325,13 @@
 
 
 
-                        $sql = "SELECT DISTINCT annoPagato FROM pagamentotessera ORDER BY annoPagato";
+                        $sql = "SELECT DISTINCT anno FROM pagamentotessera ORDER BY anno";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
 
 
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo ' <option value=' . $row['annoPagato'] . '>' . $row['annoPagato'] . '</option>';
+                            echo ' <option value=' . $row['anno'] . '>' . $row['anno'] . '</option>';
                         }
                     } catch (PDOException $e) {
                         echo "Errore nella query....<br/>";
@@ -345,9 +345,9 @@
                     echo ' </select>';
 
 
-                    echo '<br><br> <label for="nTessera" >  numero Tessera:</label>
+                    echo '<br><br> <label for="codTessera" >  numero Tessera:</label>
   
-   <select id="nTessera" style="transform: translateX(-13%);" name="nTessera" >
+   <select id="codTessera" style="transform: translateX(-13%);" name="codTessera" >
    <option value=""> </option>';
 
                     try {
@@ -355,13 +355,13 @@
 
 
 
-                        $sql = "SELECT DISTINCT nTessera from pagamentotessera";
+                        $sql = "SELECT DISTINCT codTessera from pagamentotessera";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
-
+                        
 
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo ' <option value=' . $row['nTessera'] . '>' . $row['nTessera'] . '</option>';
+                            echo ' <option value=' . $row['codTessera'] . '>' . $row['codTessera'] . '</option>';
                         }
                     } catch (PDOException $e) {
                         echo "Errore nella query....<br/>";

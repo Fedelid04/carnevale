@@ -33,7 +33,7 @@ INSERT INTO `carica` (`codCarica`, `tipoCarica`) VALUES
 	('C1', 'presidente'),
 	('C2', 'vicepresidente'),
 	('C3', 'segretario'),
-	('C4', 'generica');
+	('C4', '');
 
 -- Dump della struttura di tabella carnevalefibocchi.deposito
 DROP TABLE IF EXISTS `deposito`;
