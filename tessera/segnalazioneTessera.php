@@ -15,12 +15,27 @@
     ?>
     <div class="container" id="FormUpdate">
         <form action="nuovaTessera.php" method="post">
-            <h1>INSERISCI NUOVA TESSERA</h1>
+            <h1>SEGNALAZIONE TESSERA PERDUTA</h1>
             <div class="form-row">
                 <div class="form-group col-md-2 mx-auto">
-                    <label for="">codice Tessera:</label>
-                    <input type="text" name="codTessera" class="form-control" placeholder="numtessera">
+                    <label for="">codice Tessera Perduta:</label>
+                    <input type="text" name="codTessera" value=<?php echo $_SESSION['tessera'] ?> disabled class="form-control" placeholder="numtessera">
                 </div>
+                <div class="form-group col-md-2 mx-auto">
+                    <label for="">Nuovo codice Tessera:</label>
+                    <input type="text" name="codTessera" class="form-control" placeholder="numtessera" required>
+                </div>
+                <?php
+                include '../conn.php';
+                $sql = "SELECT * FROM tessera where codTessera='$_SESSION[tessera]'";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $tipo = $row['idTipo'];
+                }
+                ECHO "<input type='hidden' name=tipo value=".$tipo.">";
+                ?>
+                
                 <div class="form-group col-md-2 mx-auto">
                     <br>
                     <input class="form-control" type="submit" value="Segnala">

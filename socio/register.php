@@ -36,19 +36,16 @@ $tipoTessera = $_POST['tipologiaTessera'];
 echo $tipoTessera;
 echo '<br>';
 $numCivico = $_POST['civico'];
-echo $uscita;
+echo $numCivico;
 echo '<br>';
 $email = $_POST['email'];
-echo $uscitaEsterna;
+echo $email;
 echo '<br>';
 $uscita = $_POST['uscita'];
 echo $uscita;
 echo '<br>';
 $uscitaEsterna = $_POST['esterna'];
 echo $uscitaEsterna;
-echo '<br>';
-
-echo $mascheraSecondaria;
 echo '<br>';
 $tmp = 0;
 $sql = "SELECT codSocio FROM socio";
@@ -96,8 +93,11 @@ if ($totale == 1) {
     header("Location: registraSocio.php?errore=2");
     exit();
 }
+$psw=$_POST['psw'];
 $sql = "INSERT INTO socio values ('$codSocio','$nome','$cognome','$indirizzo','$citta','$provincia',
 '$cf','$cell','$dataIscrizione','$figurante','$staff','$carica',DEFAULT,'$email','$numCivico');";
+$stmt = $conn->query($sql);
+$sql = "INSERT INTO login values ('$codSocio','".hash('sha256',$psw)."')";
 $stmt = $conn->query($sql);
 if ($figurante == 'si') {
     $sql = "INSERT INTO maschera values
@@ -112,22 +112,8 @@ if ($figurante == 'si') {
     values('$codSocio','$mascheraFigurante','$mascheraSecondaria','$uscita','$uscitaEsterna')";
     $stmt = $conn->query($sql);
 }
-if (isset($_FILES["image"])) {
-    $image = $_FILES["image"];
-    $image_path = "uploads/" . $image["name"];
-    echo $image_path;
-    if (move_uploaded_file($image["tmp_name"], $image_path)) {
-        $conn = new mysqli("host", "username", "password", "database");
-        $sql = "INSERT INTO images (path) VALUES ('$image_path')";
-        $conn->query($sql);
-        $conn->close();
-    }
-} else {
-    //header("Location: aggiungiMaschera.php");
-}
 $sql = "INSERT INTO tessera VALUES ('$codTessera','$tipoTessera',DEFAULT,'$codSocio',CURDATE());";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-header("Location: registraSocio.php");
-exit();
+header("Location: ../home.php");
 ?>

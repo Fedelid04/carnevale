@@ -3,29 +3,32 @@ session_start();
 include '../conn.php';
 if (isset($_POST['usr']) && isset($_POST['pwd'])) { //controlla se l'utente ha fatto il login
     $_SESSION['usr'] = $_POST['usr'];
-    $sql = "SELECT * FROM tessera where codSocio='$_SESSION[usr]' and attiva='si'";
-    $stmt=$conn->query($sql);
-    while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-        $_SESSION['tessera']=$row['codTessera'];
+    $sql = "SELECT * FROM tessera where codSocio='$_SESSION[usr]' and attiva like 'si'";
+    $stmt = $conn->query($sql);
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $_SESSION['tessera'] = $row['codTessera'];
     }
     $_SESSION['pwd'] = $_POST['pwd'];
+    $user = $_SESSION['usr'];
+    $pass = $_SESSION['pwd'];
+    $pass = hash('sha256', $pass);
     try {
-        $sql = "SELECT * from login where codSocio LIKE '" . $_SESSION['usr'] . "'
-        AND psw like '" . hash('sha256', $_SESSION['pwd']) . "';"; //query per selezionare l'utente
+        $sql = "SELECT * from login where codSocio LIKE '" . $user . "'
+        AND psw like '$pass';"; //query per selezionare l'utente
         $stmt = $conn->query($sql);
         foreach ($stmt as $row) {
             $usr = $row['codSocio'];
             $pwd = $row['psw'];
         }
-        $sql = "SELECT tipoCarica FROM carica join socio using (codCarica) where socio.codSocio like '$_POST[usr]'"; //query per ottenere il ruolo dell'utente
-        $stmt=$conn->query($sql);
-        foreach ($stmt as $row){
-            $_SESSION['tipoCarica'] = $row['tipoCarica'];
+        $sql = "SELECT * FROM carica join socio using (codCarica) where socio.codSocio like '$_POST[usr]'"; //query per ottenere il ruolo dell'utente
+        $stmt = $conn->query($sql);
+        foreach ($stmt as $row) {
+            $_SESSION['tipoCarica'] = $row['codCarica'];
         }
     } catch (Exception $e) {
         echo $e->getMessage();
     }
-    if (isset($usr)) {   //se la query ha trovato l'utente reindirizzo l'utente verso home.php
+    if (isset($usr)) { //se la query ha trovato l'utente reindirizzo l'utente verso home.php
         header('location: ../home.php');
     } else { //se la query non ha trovato l'utente messaggio di errore
         echo '<script>alert("Errore nel login")</script>';
