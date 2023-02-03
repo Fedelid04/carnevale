@@ -5,23 +5,12 @@ $deposito = $_POST['deposito'];
 $sarta = $_POST['sarta'];
 $descrizione = $_POST['descrizione'];
 $descrizione = trim($descrizione);
-$tmp = 0;
 
-$sql = "SELECT codMaschera FROM maschera";
-$stmt = $conn->query($sql);
-$stmt->execute();
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $codMaschera = explode('MS', $row['codMaschera'])[1];
-    if ($codMaschera > $tmp) {
-        $tmp = $codMaschera;
-    }
-}
-$tmp++;
-$codMaschera = 'MS' . $tmp;
+$codMaschera = $_POST['numeroMaschera'];
 
 
 $sql = "INSERT INTO maschera values
- ('$codMaschera', '$colore' , '$descrizione' , DEFAULT , '$sarta' , '$deposito');";
+ ('$codMaschera', '$colore' , '$descrizione' , DEFAULT , '$sarta' , '$deposito',DEFAULT);";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 echo isset($_POST['my_image']);
@@ -39,3 +28,4 @@ if (isset($_FILES["image"])) {
 } else {
     //header("Location: aggiungiMaschera.php");
 }
+header("Location: ../home.php");

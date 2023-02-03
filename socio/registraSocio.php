@@ -1,4 +1,3 @@
-
 <html lang="en">
 
 <head>
@@ -94,20 +93,41 @@
           ?>
         </div>
         <div class="form-group col-md-2">
+          <label for="email">email:</label>
+          <input class="form-control" type="email" id="email" name="email">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2">
           <label for="figurante">figurante:</label>
           <select class="form-control" id="figurante" name="figurante" required onchange=mask()>
             <option value="no">no</option>
             <option value="si">si</option>
           </select>
         </div>
-      </div>
-      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="">codice Tessera:</label>
+          <input type="text" name="codTessera" class="form-control" placeholder="numtessera">
+        </div>
         <div class="form-group col-md-2" id="SceltaMaschera" style="display:none;">
           <label for="">Scegli Maschera:</label>
           <select id="mascheraFigurante" name="mascheraFigurante" required class="form-control">
             <?php
             include '../conn.php';
             $sql = "SELECT * from maschera;";
+            $stmt = $conn->query($sql);
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+              echo '<option value="' . $row['codMaschera'] . '">' . $row['codMaschera'] . '</option>';
+            }
+            ?>
+          </select>
+        </div>
+        <div class="form-group col-md-2" id="SceltaMaschera2" style="display:none;">
+          <label for="">Maschera secondaria:</label>
+          <select id="mascheraFigurante" name="mascheraFigurante" required class="form-control">
+            <?php
+            include '../conn.php';
+            $sql = "SELECT * from maschera";
             $stmt = $conn->query($sql);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
               echo '<option value="' . $row['codMaschera'] . '">' . $row['codMaschera'] . '</option>';
@@ -125,13 +145,16 @@
         </div>
     </form>
   </div>
+  <img src="../imgs/ImmagineBellaFinalePotente.jpg" class="img-fluid" alt="Responsive image">
   <script>
     function mask() {
       if (document.getElementById("figurante").value == "si") {
         document.getElementById("SceltaMaschera").style.display = "block";
+        document.getElementById("SceltaMaschera2").style.display = "block";
       }
       if (document.getElementById("figurante").value == "no") {
         document.getElementById("SceltaMaschera").style.display = "none";
+        document.getElementById("SceltaMaschera2").style.display = "none";
       }
     }
   </script>
