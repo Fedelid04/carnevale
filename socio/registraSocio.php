@@ -34,21 +34,31 @@
           <input name="cell" type="number" class="form-control" placeholder="Telefono" required>
         </div>
         <div class="form-group col-md-2">
-          <label for="">Città</label>
-          <input name="citta" type="text" class="form-control" placeholder="Arezzo" required>
+          <label for="email">email:</label>
+          <input class="form-control" type="email" id="email" name="email" required>
         </div>
         <div class="form-group col-md-2">
-          <label for="staff">staff:</label>
-          <select class="form-control" id="staff" name="staff" required>
-            <option value="si"> si </option>
-            <option value="no"> no </option>
-          </select>
+          <label for="dataIscrizione">data iscrizione:</label>
+          <?php
+          date_default_timezone_get();
+          $date = date('Y-m-d', time());
+          echo '<input type="date" id="dataIscrizione" name="dataIscrizione" placeholder="data di iscrizione"
+                    min="1920-01-01" max=' . $date . ' required class=form-control>';
+          ?>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-2">
+          <label for="">Città</label>
+          <input name="citta" type="text" class="form-control" placeholder="Arezzo" required>
+        </div>
+        <div class="form-group col-md-2">
           <label for="">Indirizzo</label>
           <input name="indirizzo" type="text" class="form-control" placeholder="Indirizzo" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="">NumCivico</label>
+          <input name="civico" type="text" class="form-control" placeholder="NumCivico" required>
         </div>
         <div class="form-group col-md-2">
           <label for="">Provincia</label>
@@ -69,6 +79,12 @@
           </select>
         </div>
         <div class="form-group col-md-2">
+          <label for="">codice Tessera:</label>
+          <input type="text" name="codTessera" class="form-control" placeholder="numtessera">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2">
           <label for="inputState">Carica</label>
           <select name="carica" id="inputState" class="form-control">
             <?php
@@ -83,23 +99,11 @@
           </select>
         </div>
         <div class="form-group col-md-2">
-          <label for="dataIscrizione">data iscrizione:</label>
-          <?php
-          date_default_timezone_get();
-          $date = date('Y-m-d', time());
-          echo '<input type="date" id="dataIscrizione" name="dataIscrizione" placeholder="data di iscrizione"
-                    min="1920-01-01" max=' . $date . ' required class=form-control>';
-          ?>
-        </div>
-        <div class="form-group col-md-2">
-          <label for="email">email:</label>
-          <input class="form-control" type="email" id="email" name="email" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-2">
-          <label for="">NumCivico</label>
-          <input name="civico" type="text" class="form-control" placeholder="NumCivico" required>
+          <label for="staff">staff:</label>
+          <select class="form-control" id="staff" name="staff" required>
+            <option value="si"> si </option>
+            <option value="no"> no </option>
+          </select>
         </div>
         <div class="form-group col-md-2">
           <label for="figurante">figurante:</label>
@@ -109,8 +113,8 @@
           </select>
         </div>
         <div class="form-group col-md-2">
-          <label for="">codice Tessera:</label>
-          <input type="text" name="codTessera" class="form-control" placeholder="numtessera">
+          <label for="">Nuova Password:</label>
+          <input type="password" id="psw" name="psw" class="form-control" required>
         </div>
         <div class="form-group col-md-2" id="SceltaMaschera" style="display:none;">
           <label for="">Maschera:</label>
@@ -203,18 +207,18 @@
     </form>
   </div>
   <?php
-    if(isset($_GET['errore'])){
+  if (isset($_GET['errore'])) {
     $errore = $_GET['errore'];
-    if($errore==1){
+    if ($errore == 1) {
       echo '<script>alert("Maschera già registrata")</script>';
     }
-    if($errore==2){
-      echo '<script>alert("Tessera già registrata")</script>'; 
+    if ($errore == 2) {
+      echo '<script>alert("Tessera già registrata")</script>';
     }
-    if($errore==3){
-      echo '<script>alert("Maschera Primaria e secondaria devono essere diverse")</script>'; 
+    if ($errore == 3) {
+      echo '<script>alert("Maschera Primaria e secondaria devono essere diverse")</script>';
     }
-    }
+  }
   ?>
   <img src="../imgs/ImmagineBellaFinalePotente.jpg" class="img-fluid" alt="Responsive image">
   <script>
@@ -229,14 +233,14 @@
         document.getElementById("immagine").style.display = "block";
         document.getElementById("uscita").style.display = "block";
         document.getElementById("esterna").style.display = "block";
-        document.getElementById("mascheraFigurante").setAttribute("required","required");
-        document.getElementById("mascheraSecondaria").setAttribute("required","required");
-        document.getElementById("descrizione").setAttribute("required","required");
-        document.getElementById("coloreForm").setAttribute("required","required");
-        document.getElementById("sartaForm").setAttribute("required","required");
-        document.getElementById("depositoForm").setAttribute("required","required");
-        document.getElementById("uscitaForm").setAttribute("required","required");
-        document.getElementById("esternaForm").setAttribute("required","required");
+        document.getElementById("mascheraFigurante").setAttribute("required", "required");
+        document.getElementById("mascheraSecondaria").setAttribute("required", "required");
+        document.getElementById("descrizione").setAttribute("required", "required");
+        document.getElementById("coloreForm").setAttribute("required", "required");
+        document.getElementById("sartaForm").setAttribute("required", "required");
+        document.getElementById("depositoForm").setAttribute("required", "required");
+        document.getElementById("uscitaForm").setAttribute("required", "required");
+        document.getElementById("esternaForm").setAttribute("required", "required");
       }
       if (document.getElementById("figurante").value == "no") {
         document.getElementById("SceltaMaschera").style.display = "none";
@@ -256,8 +260,8 @@
         document.getElementById("depositoForm").removeAttribute("required");
         document.getElementById("uscitaForm").removeAttribute("required");
         document.getElementById("esternaForm").removeAttribute("required");
+      }
     }
-  }
   </script>
   <script src="//code.jquery.com/jquery.js"></script>
   <script src="../bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>

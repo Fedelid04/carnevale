@@ -9,23 +9,28 @@ if (isset($_POST['usr']) && isset($_POST['pwd'])) { //controlla se l'utente ha f
         $_SESSION['tessera']=$row['codTessera'];
     }
     $_SESSION['pwd'] = $_POST['pwd'];
+    $user = $_SESSION['usr'];
+    echo $user;
+    $pass= $_SESSION['pwd'];
+    echo $pass;
+    $pass=hash('sha256',$pass);
     try {
-        $sql = "SELECT * from login where codSocio LIKE '" . $_SESSION['usr'] . "'
-        AND psw like '" . hash('sha256', $_SESSION['pwd']) . "';"; //query per selezionare l'utente
+        $sql = "SELECT * from login where codSocio LIKE '".$user."'
+        AND psw like '$pass';"; //query per selezionare l'utente
         $stmt = $conn->query($sql);
         foreach ($stmt as $row) {
             $usr = $row['codSocio'];
             $pwd = $row['psw'];
         }
-        $sql = "SELECT tipoCarica FROM carica join socio using (codCarica) where socio.codSocio like '$_POST[usr]'"; //query per ottenere il ruolo dell'utente
+        $sql = "SELECT * FROM carica join socio using (codCarica) where socio.codSocio like '$_POST[usr]'"; //query per ottenere il ruolo dell'utente
         $stmt=$conn->query($sql);
         foreach ($stmt as $row){
-            $_SESSION['tipoCarica'] = $row['tipoCarica'];
+            $_SESSION['tipoCarica'] = $row['codCarica'];
         }
     } catch (Exception $e) {
         echo $e->getMessage();
     }
-    if (isset($usr)) {   //se la query ha trovato l'utente reindirizzo l'utente verso home.php
+    if (isset($usr)) { //se la query ha trovato l'utente reindirizzo l'utente verso home.php
         header('location: ../home.php');
     } else { //se la query non ha trovato l'utente messaggio di errore
         echo '<script>alert("Errore nel login")</script>';

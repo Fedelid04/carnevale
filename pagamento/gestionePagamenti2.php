@@ -80,7 +80,11 @@
                     <input class="form-control" type="text" id="quota" name="ricevuta" required>
                 </div>
             </div>
-            <input type="submit" value="Registra">
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <input class="form-control" type="submit" value="Registra">
+                </div>
+            </div>
         </form>
         <br>
         <form action="aggiungiPagamento.php" method="post">
@@ -96,7 +100,7 @@
                             $stmt = $conn->prepare($sql);
                             $stmt->execute();
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<option value='.$row['anno'].'>'.$row['anno'].'</option>';
+                                echo '<option value=' . $row['anno'] . '>' . $row['anno'] . '</option>';
                             }
                         } catch (PDOException $e) {
                             echo "Errore nella query....<br/>";
@@ -132,9 +136,13 @@
                         ?>
                     </select>
                 </div>
-                
             </div>
-            <input type="submit" value="Elimina">
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <input class="form-control" type="submit" value="Elimina">
+                </div>
+            </div>
+        </form>
     </div>
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="../bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
