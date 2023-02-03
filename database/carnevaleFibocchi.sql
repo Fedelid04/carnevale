@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `figurante_manichino` (
   CONSTRAINT `figurante_manichino_ibfk_2` FOREIGN KEY (`codMaschera`) REFERENCES `maschera` (`codMaschera`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella carnevalefibocchi.figurante_manichino: ~1 rows (circa)
+-- Dump dei dati della tabella carnevalefibocchi.figurante_manichino: ~0 rows (circa)
 INSERT INTO `figurante_manichino` (`codManichino`, `codMaschera`) VALUES
 	('MN1', 'MS2');
 
@@ -259,6 +259,7 @@ CREATE TABLE IF NOT EXISTS `socio` (
   `codCarica` varchar(50) NOT NULL,
   `eliminato` set('si','no') DEFAULT 'no',
   `email` varchar(50) DEFAULT NULL,
+  `civico` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`codSocio`),
   KEY `codCarica` (`codCarica`),
   CONSTRAINT `socio_ibfk_1` FOREIGN KEY (`codCarica`) REFERENCES `carica` (`codCarica`),
@@ -266,12 +267,12 @@ CREATE TABLE IF NOT EXISTS `socio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dump dei dati della tabella carnevalefibocchi.socio: ~5 rows (circa)
-INSERT INTO `socio` (`codSocio`, `nome`, `cognome`, `via`, `citta`, `provincia`, `cf`, `cell`, `dataIscrizione`, `figurante`, `staff`, `codCarica`, `eliminato`, `email`) VALUES
-	('SC1', 'caio', 'ROMA', 'Guido Monaco', 'A', 'Arezzo', 'RSSMRA80A01A390R', '23423', '2023-01-31', 'no', 'no', 'C1', 'no', NULL),
-	('SC2', 'Michele', 'Brunostrati', 'Via Governo 22B', 'Bibbiena', 'Arezzo', 'MCHBNS80A01A851Q', '675314312', '2023-01-31', 'si', 'si', 'C1', 'si', NULL),
-	('SC3', 'caio', 'GEPPETTO', 'Guido Monaco', 'A', 'Arezzo', 'CRSLNS04S21A509G', '213432', '2023-01-31', 'no', 'no', 'C4', 'no', NULL),
-	('SC4', 'caio', 'GEPPETTO', 'Guido Monaco', 'efwff', 'ffff', 'CRSLNS04S21A509G', '21334', '2023-02-02', 'no', 'si', 'C2', 'no', NULL),
-	('SC5', 'Falier', 'Biagioni', 'Via setteponti 92/A', 'Castiglion Fibocchi', 'Arezzo', 'BGNFLR78B11A390R', '3409127619', '2000-01-11', 'si', 'si', 'C4', 'no', NULL);
+INSERT INTO `socio` (`codSocio`, `nome`, `cognome`, `via`, `citta`, `provincia`, `cf`, `cell`, `dataIscrizione`, `figurante`, `staff`, `codCarica`, `eliminato`, `email`, `civico`) VALUES
+	('SC1', 'caio', 'ROMA', 'Guido Monaco', 'A', 'Arezzo', 'RSSMRA80A01A390R', '23423', '2023-01-31', 'no', 'no', 'C1', 'no', NULL, NULL),
+	('SC2', 'Michele', 'Brunostrati', 'Via Governo 22B', 'Bibbiena', 'Arezzo', 'MCHBNS80A01A851Q', '675314312', '2023-01-31', 'si', 'si', 'C1', 'si', NULL, NULL),
+	('SC3', 'caio', 'GEPPETTO', 'Guido Monaco', 'A', 'Arezzo', 'CRSLNS04S21A509G', '213432', '2023-01-31', 'no', 'no', 'C4', 'no', NULL, NULL),
+	('SC4', 'caio', 'GEPPETTO', 'Guido Monaco', 'efwff', 'ffff', 'CRSLNS04S21A509G', '21334', '2023-02-02', 'no', 'si', 'C2', 'no', NULL, NULL),
+	('SC5', 'Falier', 'Biagioni', 'Via setteponti 92/A', 'Castiglion Fibocchi', 'Arezzo', 'BGNFLR78B11A390R', '3409127619', '2000-01-11', 'si', 'si', 'C4', 'no', NULL, NULL);
 
 -- Dump della struttura di tabella carnevalefibocchi.socio_evento
 DROP TABLE IF EXISTS `socio_evento`;
